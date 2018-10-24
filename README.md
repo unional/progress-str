@@ -18,6 +18,7 @@ Create a progress string.
 50% [------|------] 100.0%
 [=====-----] 50.0%
 (=====    ) 50.0%
+39% [======          ]
 ```
 
 [circleci-image]: https://circleci.com/gh/unional/progress-str/tree/master.svg?style=shield
