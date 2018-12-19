@@ -1,30 +1,28 @@
 import { unpartial } from 'unpartial';
-import { CurrentValueOutOfRange } from './errors';
+import { CurrentValueOutOfBound, MaxValueOutOfBound } from './errors';
 
 export interface Options {
   length: number
   maxValue: number
 }
 
-export class ProgressBar {
-  length: number
-  maxValue: number
-  constructor(options?: Partial<Options>) {
-    const { length, maxValue } = unpartial({ length: 30, maxValue: 1 }, options)
-    this.length = length
-    this.maxValue = maxValue
-  }
-  render(value: number) {
-    return progressBarPercent(value, this)
+export function progressBar(options?: Partial<Options>) {
+  const actualOptions = unpartial({ length: 30, maxValue: 1 }, options)
+  if (actualOptions.maxValue <= 0) throw new MaxValueOutOfBound(actualOptions.maxValue)
+  return {
+    render(value: number) {
+      return progressBarPercent(value, actualOptions)
+    }
   }
 }
 
 function progressBarPercent(currentValue: number, options: Options) {
-  if (currentValue > 1) throw new CurrentValueOutOfRange(currentValue)
+  if (currentValue > options.maxValue) throw new CurrentValueOutOfBound(currentValue)
 
-  const percent = toPercentage(currentValue, 1)
+  const percentage = currentValue / options.maxValue
+  const percentStr = toStringPercentage(percentage, 1)
   const spaceLength = 1
-  return `${toBar(currentValue, options.length - percent.length - spaceLength)} ${percent}`
+  return `${toBar(percentage, options.length - percentStr.length - spaceLength)} ${percentStr}`
 }
 
 function toBar(percent: number, length: number) {
@@ -36,6 +34,6 @@ function toBar(percent: number, length: number) {
   return `[${bar.join('')}]`
 }
 
-function toPercentage(value: number, fractionDigits: number) {
+function toStringPercentage(value: number, fractionDigits: number) {
   return `${(value * 100).toFixed(fractionDigits)}%`
 }
