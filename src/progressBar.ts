@@ -1,24 +1,25 @@
+import { unpartial } from 'unpartial';
 import { CurrentValueOutOfRange } from './errors';
 
 export interface Options {
   length: number
+  maxValue: number
 }
 
-export function progressBar(currentValue: number, options?: Options)
-export function progressBar(currentValue: number, maxValue: number, options?: Options)
-export function progressBar(currentValue: number, maxOrOption?: any, options?: any) {
-  if (options) {
-    return progressBarWithMax(currentValue, maxOrOption, options)
+export class ProgressBar {
+  length: number
+  maxValue: number
+  constructor(options?: Partial<Options>) {
+    const { length, maxValue } = unpartial({ length: 30, maxValue: 1 }, options)
+    this.length = length
+    this.maxValue = maxValue
   }
-
-  return progressBarPercent(currentValue, maxOrOption)
+  render(value: number) {
+    return progressBarPercent(value, this)
+  }
 }
 
-function progressBarWithMax(currentValue: number, maxValue: number, options: Options) {
-
-}
-
-function progressBarPercent(currentValue: number, options: Options = { length: 30 }) {
+function progressBarPercent(currentValue: number, options: Options) {
   if (currentValue > 1) throw new CurrentValueOutOfRange(currentValue)
 
   const percent = toPercentage(currentValue, 1)
