@@ -11,7 +11,48 @@
 [![Visual Studio Code][vscode-image]][vscode-url]
 [![Wallaby.js][wallaby-image]][wallaby-url]
 
-Create a progress string.
+Create a string based progress bar
+
+## Single value progress bar
+
+```ts
+import { progressBar } from 'progress-str'
+
+const progress = progressBar()
+
+progress.render(0.5) // [-----------|----------] 50.0%
+```
+
+### progressBar(options)
+
+```ts
+progressBar({
+  length: 30, // total length of the result, including the numeric value
+  maxValue: 1, // Value that means 100% for the progress
+})
+```
+
+## Two values progress bar
+
+```ts
+import { twoValuesProgressBar } from 'progress-str'
+
+const progress = twoValuesProgressBar()
+
+progress.render(0.5, 1) // [--------|------|] 50.0% 100.0%
+```
+
+### twoValuesProgressBar(options)
+
+```ts
+progressBar({
+  length: 30, // total length of the result, including the numeric value
+  maxValue: 1, // Value that means 100% for the progress
+})
+```
+
+
+## TODO
 
 ```sh
 [-----|-----] 50.0%
