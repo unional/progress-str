@@ -61,14 +61,8 @@ test('maxValue = 0 throws MaxValueOutOfBound', () => {
 
 test('two values', () => {
   const bar = twoValuesProgressBar()
-  const actual = bar.render(0.5, 1)
-  t.strictEqual(actual, '[--------|------|] 50.0% 100.0%')
-})
-
-test('two values', () => {
-  const bar = twoValuesProgressBar()
-  const actual = bar.render(1, 0.5)
-  t.strictEqual(actual, '[--------|------|] 100.0% 50.0%')
+  t.strictEqual(bar.render(0.5, 1), '[--------|------|] 50.0% 100.0%')
+  t.strictEqual(bar.render(1, 0.5), '[--------|------|] 100.0% 50.0%')
 })
 
 test('two same values', () => {
