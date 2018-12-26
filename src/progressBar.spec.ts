@@ -16,7 +16,6 @@ test('prints 0 as 0.0%', () => {
 })
 
 test('options can be empty', () => {
-  // tslint:disable-next-line
   progressBar({})
 })
 
