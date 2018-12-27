@@ -28,7 +28,7 @@ progress.render(0.5) // [-----------|----------] 50.0%
 ```ts
 progressBar({
   length: 30, // total length of the result, including the numeric value
-  maxValue: 1, // Value that means 100% for the progress
+  maxValue: 1, // Value that means 100%
 })
 ```
 
@@ -45,9 +45,9 @@ progress.render(0.5, 1) // [--------|------|] 50.0% 100.0%
 ### twoValuesProgressBar(options)
 
 ```ts
-progressBar({
+twoValuesProgressBar({
   length: 30, // total length of the result, including the numeric value
-  maxValue: 1, // Value that means 100% for the progress
+  maxValue: 1, // Value that means 100%
 })
 ```
 
