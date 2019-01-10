@@ -1,17 +1,10 @@
 import { RecursivePartial } from 'type-plus';
 import { unpartial, unpartialRecursively } from 'unpartial';
-import { barFormat, length, valueOptions } from './defaultOptions';
 import { CurrentValueOutOfBound } from './errors';
 import { BarOptions, ValueOptions } from './interfaces';
-import { ProgressBarOptions } from './progressBar';
 import { renderBar } from './renderBar';
 import { validateBarFormat, validateValueOptions } from './validate';
-
-const defaultOptions: ProgressBarOptions = {
-  length,
-  valueOptions,
-  barFormat
-}
+import { defaultOptions } from './defaultOptions';
 
 export type TwoValuesProgressBarOptions = {
   length: number

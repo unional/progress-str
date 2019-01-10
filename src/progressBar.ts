@@ -1,20 +1,10 @@
 import { RecursivePartial } from 'type-plus';
 import { unpartialRecursively } from 'unpartial';
-import { barFormat, length, valueOptions } from './defaultOptions';
 import { CurrentValueOutOfBound } from './errors';
-import { ValueOptions } from './interfaces';
-import { renderBar, RenderBarOptions } from './renderBar';
+import { renderBar } from './renderBar';
 import { validateBarFormat, validateValueOptions } from './validate';
-
-export type ProgressBarOptions = RenderBarOptions & {
-  valueOptions: ValueOptions
-}
-
-const defaultOptions: ProgressBarOptions = {
-  length,
-  barFormat,
-  valueOptions
-}
+import { ProgressBarOptions } from './interfaces';
+import { defaultOptions } from './defaultOptions';
 
 export function progressBar(options?: RecursivePartial<ProgressBarOptions>) {
   const { length, valueOptions, barFormat } = extractOptions(options)
