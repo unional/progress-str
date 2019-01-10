@@ -1,7 +1,13 @@
+import { ProgressBarOptions } from './interfaces';
 
-export const length = 30
-export const valueOptions = { max: 1, char: '|' }
-export const barFormat = {
-  completedChar: '-',
-  incompleteChar: '-'
+export const defaultOptions: ProgressBarOptions = {
+  length: 30,
+  barFormat: {
+    completedChar: '-',
+    incompleteChar: '-'
+  },
+  valueOptions: {
+    max: 1,
+    char: '|'
+  }
 }
