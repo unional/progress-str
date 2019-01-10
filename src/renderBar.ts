@@ -2,6 +2,7 @@ import { BarFormat, ValueOptions } from './interfaces';
 
 export type RenderBarOptions = {
   length: number
+  valuePosition: 'left' | 'right'
   barFormat: BarFormat
 }
 
@@ -14,7 +15,9 @@ export function renderBar(options: RenderBarOptions, ...entries: ValueEntry[]) {
   const percentStr = normalizedEntries.map(p => toStringPercentage(p.value, 1)).join(' ')
 
   const spaceLength = 1
-  return `${toBar(options.length - percentStr.length - spaceLength, options.barFormat, normalizedEntries)} ${percentStr}`
+  const bar = toBar(options.length - percentStr.length - spaceLength, options.barFormat, normalizedEntries)
+
+  return options.valuePosition === 'left' ? `${percentStr} ${bar}` : `${bar} ${percentStr}`
 }
 
 function toStringPercentage(value: number, fractionDigits: number) {

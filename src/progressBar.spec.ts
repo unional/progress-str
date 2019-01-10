@@ -77,6 +77,12 @@ test('valueFormat.valueChar length can only be 1', () => {
   a.throws(() => progressBar({ valueOptions: { char: 'ab' } }), StringTooLong)
 })
 
+test('valuePosition.left places value representation to the left of the bar', () => {
+  const bar = progressBar({ valuePosition: 'left' })
+  const actual = bar.render(0.5)
+  t.strictEqual(actual, '50.0% [-----------|----------]')
+})
+
 test.skip('formats', () => {
   // 10 [-----|-----] 20
   // [-----|-----] 10/20

@@ -28,6 +28,7 @@ progress.render(0.5) // [-----------|----------] 50.0%
 ```ts
 progressBar({
   length: 30, // total length of the result, including the numeric value
+  valuePosition: 'right', // 'left' or 'right'
   barFormat: {
     completedChar: '-', // character for completed section of the bar
     incompleteChar: '-' // character for incomplete section of the bar
@@ -54,6 +55,7 @@ progress.render(0.5, 1) // [--------|------|] 50.0% 100.0%
 ```ts
 twoValuesProgressBar({
   length: 30, // total length of the result, including the numeric value
+  valuePosition: 'right', // 'left' or 'right'
   barFormat: {
     completedChar: '-', // character for completed section of the bar
     incompleteChar: '-' // character for incomplete section of the bar
@@ -76,9 +78,7 @@ twoValuesProgressBar({
 
 ```sh
 (=====    ) 50.0%
-39% [======          ]
 [-----|-----] 10/20
-10/20 [-----|-----]
 ```
 
 [circleci-image]: https://circleci.com/gh/unional/progress-str/tree/master.svg?style=shield

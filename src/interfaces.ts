@@ -8,8 +8,12 @@ export type ValueOptions = {
   char: string
 }
 
-export type ProgressBarOptions = {
+export type BaseOptions = {
   length: number
+  valuePosition: 'left' | 'right'
   barFormat: BarFormat
+}
+
+export type ProgressBarOptions = BaseOptions & {
   valueOptions: ValueOptions
 }
