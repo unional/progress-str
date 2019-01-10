@@ -1,8 +1,8 @@
-import { BarOptions, ValueOptions } from './interfaces';
+import { BarFormat, ValueOptions } from './interfaces';
 
 export type RenderBarOptions = {
   length: number
-  barFormat: BarOptions
+  barFormat: BarFormat
 }
 
 export type ValueEntry = ValueOptions & { value: number }
@@ -21,7 +21,7 @@ function toStringPercentage(value: number, fractionDigits: number) {
   return `${(value * 100).toFixed(fractionDigits)}%`
 }
 
-function toBar(length: number, format: BarOptions, entries: ValueEntry[]) {
+function toBar(length: number, format: BarFormat, entries: ValueEntry[]) {
   const bracketLength = 1
   const barInsideLength = length - bracketLength * 2
   const bar = createBarArray(entries, format, barInsideLength)

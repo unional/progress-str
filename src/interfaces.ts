@@ -1,4 +1,4 @@
-export type BarOptions = {
+export type BarFormat = {
   completedChar: string
   incompleteChar: string
 }
@@ -10,6 +10,6 @@ export type ValueOptions = {
 
 export type ProgressBarOptions = {
   length: number
-  barFormat: BarOptions
+  barFormat: BarFormat
   valueOptions: ValueOptions
 }
