@@ -7,21 +7,22 @@ import { ProgressBarOptions } from './interfaces';
 import { defaultOptions } from './defaultOptions';
 
 export function progressBar(options?: RecursivePartial<ProgressBarOptions>) {
-  const { length, valueOptions, barFormat } = extractOptions(options)
+  const { length, valuePosition, valueOptions, barFormat } = extractOptions(options)
   return {
     render(value: number) {
       if (value > valueOptions.max) throw new CurrentValueOutOfBound(value)
-      return renderBar({ length, barFormat }, { value, ...valueOptions })
+      return renderBar({ length, valuePosition, barFormat }, { value, ...valueOptions })
     }
   }
 }
 
 function extractOptions(options?: RecursivePartial<ProgressBarOptions>) {
-  const { length, valueOptions, barFormat } = unpartialRecursively(defaultOptions, options)
+  const { length, valuePosition, valueOptions, barFormat } = unpartialRecursively(defaultOptions, options)
   validateBarFormat(barFormat)
   validateValueOptions(valueOptions)
   return {
     length,
+    valuePosition,
     barFormat,
     valueOptions
   }
