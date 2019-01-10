@@ -29,6 +29,13 @@ progress.render(0.5) // [-----------|----------] 50.0%
 progressBar({
   length: 30, // total length of the result, including the numeric value
   maxValue: 1, // Value that means 100%
+  barFormat: {
+    completedChar: '-', // character for completed section of the bar
+    incompleteChar: '-' // character for incomplete section of the bar
+  },
+  valueFormat: {
+    valueChar: '|' // character for the value
+  }
 })
 ```
 
@@ -48,16 +55,26 @@ progress.render(0.5, 1) // [--------|------|] 50.0% 100.0%
 twoValuesProgressBar({
   length: 30, // total length of the result, including the numeric value
   maxValue: 1, // Value that means 100%
+  barFormat: {
+    completedChar: '-', // character for completed section of the bar
+    incompleteChar: '-' // character for incomplete section of the bar
+  },
+  valueFormat: {
+    valueChar: '|' // character for the value
+  },
+  // or
+  valueFormat: [
+    // for first value
+    { valueChar: '|' },
+    // for second value
+    { valueChar: '*' }
+  ]
 })
 ```
-
 
 ## TODO
 
 ```sh
-[-----|-----] 50.0%
-50% [------|------] 100.0%
-[=====-----] 50.0%
 (=====    ) 50.0%
 39% [======          ]
 [---A---B---]
