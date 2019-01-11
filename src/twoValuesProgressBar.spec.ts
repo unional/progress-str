@@ -29,25 +29,25 @@ test('second value > specified maxValue throws CurrentValueOutOfBound', () => {
   a.throws(() => bar.render(1, 12), CurrentValueOutOfBound)
 })
 test('can format characters used in the bar', () => {
-  const bar = twoValuesProgressBar({ barFormat: { completedChar: '=', incompleteChar: ' ' }, valueOptions: { char: '=' } })
+  const bar = twoValuesProgressBar({ barFormat: { completedMarker: '=', incompleteMarker: ' ' }, valueOptions: { marker: '=' } })
   t.strictEqual(bar.render(0.5, 0.5), '[=========       ] 50.0% 50.0%')
 })
 
 test('format each value with different character', () => {
-  const bar = twoValuesProgressBar({ valueOptions: [{ char: '|' }, { char: '*' }] })
+  const bar = twoValuesProgressBar({ valueOptions: [{ marker: '|' }, { marker: '*' }] })
   t.strictEqual(bar.render(0.5, 1), '[-------|------*] 50.0% 100.0%')
 })
 
 test('barFormat.incompleteChar length can only be 1', () => {
-  a.throws(() => twoValuesProgressBar({ barFormat: { incompleteChar: 'ab' } }), StringTooLong)
+  a.throws(() => twoValuesProgressBar({ barFormat: { incompleteMarker: 'ab' } }), StringTooLong)
 })
 
 test('valueFormat.completedChar length can only be 1', () => {
-  a.throws(() => twoValuesProgressBar({ barFormat: { completedChar: 'ab' } }), StringTooLong)
+  a.throws(() => twoValuesProgressBar({ barFormat: { completedMarker: 'ab' } }), StringTooLong)
 })
 
 test('valueFormat.valueChar length can only be 1', () => {
-  a.throws(() => twoValuesProgressBar({ valueOptions: { char: 'ab' } }), StringTooLong)
+  a.throws(() => twoValuesProgressBar({ valueOptions: { marker: 'ab' } }), StringTooLong)
 })
 
 test('valuePosition.left places value representation to the left of the bar', () => {

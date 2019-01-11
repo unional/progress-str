@@ -31,7 +31,7 @@ function toBar(length: number, format: BarFormat, entries: ValueEntry[]) {
   return `[${bar.join('')}]`
 }
 
-function createBarArray(entries: ValueEntry[], { completedChar, incompleteChar }: { completedChar: string, incompleteChar: string }, length: number) {
+function createBarArray(entries: ValueEntry[], { completedMarker, incompleteMarker }: BarFormat, length: number) {
   const sortedEntries = entries
     .map(p => ({ ...p, value: Math.round(p.value * (length - 1)) }))
     .sort((a, b) => a.value - b.value)
@@ -41,17 +41,17 @@ function createBarArray(entries: ValueEntry[], { completedChar, incompleteChar }
   while (sortedEntries.length) {
     const entry = sortedEntries.shift()!
     while (i < entry.value) {
-      bar[i] = completedChar
+      bar[i] = completedMarker
       i++
     }
     if (i === entry.value) {
-      bar[i] = entry.char
+      bar[i] = entry.marker
       i++
     }
   }
 
   while (bar.length < length) {
-    bar[bar.length] = incompleteChar
+    bar[bar.length] = incompleteMarker
   }
   return bar
 }

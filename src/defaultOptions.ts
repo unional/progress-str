@@ -4,11 +4,11 @@ export const defaultOptions: ProgressBarOptions = {
   length: 30,
   valuePosition: 'right',
   barFormat: {
-    completedChar: '-',
-    incompleteChar: '-'
+    completedMarker: '-',
+    incompleteMarker: '-'
   },
   valueOptions: {
     max: 1,
-    char: '|'
+    marker: '|'
   }
 }

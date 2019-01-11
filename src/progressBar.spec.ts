@@ -24,7 +24,7 @@ test('default length is 30', () => {
   t.strictEqual(actual.length, 30)
 })
 
-test('options.length control the length of the overall result', () => {
+test('options.length controls the length of the overall result', () => {
   const bar = progressBar({ length: 15 })
   const actual = bar.render(0.5)
   t.strictEqual(actual.length, 15)
@@ -60,21 +60,21 @@ test('max = 0 throws MaxValueOutOfBound', () => {
   a.throws(() => progressBar({ valueOptions: { max: 0 } }), MaxValueOutOfBound)
 })
 
-test('can format characters used in the bar', () => {
-  const bar = progressBar({ barFormat: { completedChar: '=', incompleteChar: ' ' }, valueOptions: { char: '=' } })
+test('can format markers used in the bar', () => {
+  const bar = progressBar({ barFormat: { completedMarker: '=', incompleteMarker: ' ' }, valueOptions: { marker: '=' } })
   t.strictEqual(bar.render(0.5), '[============          ] 50.0%')
 })
 
-test('barFormat.incompleteChar length can only be 1', () => {
-  a.throws(() => progressBar({ barFormat: { incompleteChar: 'ab' } }), StringTooLong)
+test('barFormat.incompleteMarker length can only be 1', () => {
+  a.throws(() => progressBar({ barFormat: { incompleteMarker: 'ab' } }), StringTooLong)
 })
 
-test('valueFormat.completedChar length can only be 1', () => {
-  a.throws(() => progressBar({ barFormat: { completedChar: 'ab' } }), StringTooLong)
+test('barFormat.completedMarker length can only be 1', () => {
+  a.throws(() => progressBar({ barFormat: { completedMarker: 'ab' } }), StringTooLong)
 })
 
-test('valueFormat.valueChar length can only be 1', () => {
-  a.throws(() => progressBar({ valueOptions: { char: 'ab' } }), StringTooLong)
+test('valueOptions.marker length can only be 1', () => {
+  a.throws(() => progressBar({ valueOptions: { marker: 'ab' } }), StringTooLong)
 })
 
 test('valuePosition.left places value representation to the left of the bar', () => {
