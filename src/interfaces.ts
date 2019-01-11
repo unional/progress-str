@@ -1,11 +1,11 @@
 export type BarFormat = {
-  completedChar: string
-  incompleteChar: string
+  completedMarker: string
+  incompleteMarker: string
 }
 
 export type ValueOptions = {
   max: number
-  char: string
+  marker: string
 }
 
 export type BaseOptions = {

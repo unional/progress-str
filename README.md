@@ -30,12 +30,12 @@ progressBar({
   length: 30, // total length of the result, including the numeric value
   valuePosition: 'right', // 'left' or 'right'
   barFormat: {
-    completedChar: '-', // character for completed section of the bar
-    incompleteChar: '-' // character for incomplete section of the bar
+    completedMarker: '-', // character for completed section of the bar
+    incompleteMarker: '-' // character for incomplete section of the bar
   },
   valueOptions: {
     max: 1, // Value that means 100%
-    char: '|' // character for the value
+    marker: '|' // character for the value
   }
 })
 ```
@@ -57,19 +57,19 @@ twoValuesProgressBar({
   length: 30, // total length of the result, including the numeric value
   valuePosition: 'right', // 'left' or 'right'
   barFormat: {
-    completedChar: '-', // character for completed section of the bar
-    incompleteChar: '-' // character for incomplete section of the bar
+    completedMarker: '-', // character for completed section of the bar
+    incompleteMarker: '-' // character for incomplete section of the bar
   },
   valueOptions: {
     max: 1, // Value that means 100%
-    char: '|' // character for the value
+    marker: '|' // character for the value
   },
   // or
   valueOptions: [
     // for first value
-    { char: '|' },
+    { marker: '|' },
     // for second value
-    { char: '*' }
+    { marker: '*' }
   ]
 })
 ```
