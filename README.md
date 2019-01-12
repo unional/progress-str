@@ -13,7 +13,7 @@
 
 Create a string based progress bar
 
-## Single value progress bar
+## Usage
 
 ```ts
 import { progressBar } from 'progress-str'
@@ -23,62 +23,29 @@ const progress = progressBar()
 progress.render(0.5) // [-----------|----------] 50.0%
 ```
 
-### progressBar(options)
+## Configure
 
 ```ts
 progressBar({
-  length: 30, // total length of the result, including the numeric value
-  valuePosition: 'right', // 'left' or 'right'
-  barFormat: {
-    completedMarker: '-', // character for completed section of the bar
-    incompleteMarker: '-' // character for incomplete section of the bar
+  bar: {
+    completedMarker: '-', // marker for completed section of the bar
+    incompleteMarker: '-' // marker for incomplete section of the bar
   },
-  valueOptions: {
+  length: 30, // total length of the result, including the text
+  textPosition: 'right', // 'left' | 'right'
+  textStyle: 'percentage', // 'percentage' | 'number' | 'ratio'
+  value: {
+    digits: 1 // number of fraction digits. 0 | 1 | 2
     max: 1, // Value that means 100%
-    marker: '|' // character for the value
+    marker: '|' // marker for the value
   }
 })
-```
 
-## Two values progress bar
-
-```ts
-import { twoValuesProgressBar } from 'progress-str'
-
-const progress = twoValuesProgressBar()
-
-progress.render(0.5, 1) // [--------|------|] 50.0% 100.0%
-```
-
-### twoValuesProgressBar(options)
-
-```ts
-twoValuesProgressBar({
-  length: 30, // total length of the result, including the numeric value
-  valuePosition: 'right', // 'left' or 'right'
-  barFormat: {
-    completedMarker: '-', // character for completed section of the bar
-    incompleteMarker: '-' // character for incomplete section of the bar
-  },
-  valueOptions: {
-    max: 1, // Value that means 100%
-    marker: '|' // character for the value
-  },
-  // or
-  valueOptions: [
-    // for first value
-    { marker: '|' },
-    // for second value
-    { marker: '*' }
-  ]
+// To style multiple values
+progressBar({
+  ...
+  values: [{ ... }, { ... }, ...]
 })
-```
-
-## TODO
-
-```sh
-(=====    ) 50.0%
-[-----|-----] 10/20
 ```
 
 [circleci-image]: https://circleci.com/gh/unional/progress-str/tree/master.svg?style=shield

@@ -1,39 +1,41 @@
-import { BarFormat, ValueOptions } from './interfaces';
+import { BarFormat, BaseOptions, ValueOptions } from './interfaces';
 
-export type RenderBarOptions = {
-  length: number
-  valuePosition: 'left' | 'right'
-  barFormat: BarFormat
-}
 
 export type ValueEntry = ValueOptions & { value: number }
 
 
-export function renderBar(options: RenderBarOptions, ...entries: ValueEntry[]) {
+export function renderBar(baseOptions: BaseOptions, ...entries: ValueEntry[]) {
 
-  const normalizedEntries = entries.map(e => ({ ...e, value: e.value / e.max }))
-  const percentStr = normalizedEntries.map(p => toStringPercentage(p.value, 1)).join(' ')
+  const percentStr = entries.map(e => formatText(baseOptions, e)).join(' ')
 
   const spaceLength = 1
-  const bar = toBar(options.length - percentStr.length - spaceLength, options.barFormat, normalizedEntries)
+  const bar = toBar(baseOptions.length - percentStr.length - spaceLength, baseOptions.bar, entries)
 
-  return options.valuePosition === 'left' ? `${percentStr} ${bar}` : `${bar} ${percentStr}`
+  return baseOptions.textPosition === 'left' ? `${percentStr} ${bar}` : `${bar} ${percentStr}`
 }
 
-function toStringPercentage(value: number, fractionDigits: number) {
-  return `${(value * 100).toFixed(fractionDigits)}%`
+function formatText(options: Pick<BaseOptions, 'textStyle'>, entry: ValueEntry) {
+  switch (options.textStyle) {
+    case 'percentage':
+      return `${(entry.value / entry.max * 100).toFixed(entry.digits)}%`
+    case 'number':
+      return (entry.value).toFixed(entry.digits)
+    case 'ratio':
+      return `${entry.value.toFixed(entry.digits)}/${entry.max}`
+  }
 }
 
 function toBar(length: number, format: BarFormat, entries: ValueEntry[]) {
   const bracketLength = 1
   const barInsideLength = length - bracketLength * 2
-  const bar = createBarArray(entries, format, barInsideLength)
+  const normalizedEntries = entries.map(e => ({ ...e, value: e.value / e.max }))
+  const bar = createBarArray(normalizedEntries, format, barInsideLength)
   return `[${bar.join('')}]`
 }
 
 function createBarArray(entries: ValueEntry[], { completedMarker, incompleteMarker }: BarFormat, length: number) {
   const sortedEntries = entries
-    .map(p => ({ ...p, value: Math.round(p.value * (length - 1)) }))
+    .map(e => ({ ...e, value: Math.round(Math.min(1, e.value) * (length - 1)) }))
     .sort((a, b) => a.value - b.value)
 
   const bar: string[] = []

@@ -1,14 +1,17 @@
-import { ProgressBarOptions } from './interfaces';
+import { BaseOptions, ValueOptions } from './interfaces';
 
-export const defaultOptions: ProgressBarOptions = {
-  length: 30,
-  valuePosition: 'right',
-  barFormat: {
+export const defaultBaseOptions: BaseOptions = {
+  bar: {
     completedMarker: '-',
     incompleteMarker: '-'
   },
-  valueOptions: {
-    max: 1,
-    marker: '|'
-  }
+  length: 30,
+  textPosition: 'right',
+  textStyle: 'percentage'
+}
+
+export const defaultValueOptions: ValueOptions = {
+  digits: 1,
+  max: 1,
+  marker: '|'
 }
