@@ -5,15 +5,21 @@ export type BarFormat = {
 
 export type ValueOptions = {
   max: number
-  marker: string
+  marker: string,
+  digits: 0 | 1 | 2
 }
 
 export type BaseOptions = {
+  bar: BarFormat
   length: number
-  valuePosition: 'left' | 'right'
-  barFormat: BarFormat
+  textPosition: 'left' | 'right'
+  textStyle: 'percentage' | 'number' | 'ratio'
 }
 
 export type ProgressBarOptions = BaseOptions & {
-  valueOptions: ValueOptions
+  value: ValueOptions
+}
+
+export type MultiValuesProgressBarOptions = BaseOptions & {
+  values: ValueOptions[]
 }

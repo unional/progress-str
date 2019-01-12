@@ -1,29 +1,51 @@
 import { RecursivePartial } from 'type-plus';
-import { unpartialRecursively } from 'unpartial';
-import { CurrentValueOutOfBound } from './errors';
+import { unpartial, unpartialRecursively } from 'unpartial';
+import { defaultBaseOptions, defaultValueOptions } from './defaultOptions';
+import { MultiValuesProgressBarOptions, ProgressBarOptions, ValueOptions } from './interfaces';
 import { renderBar } from './renderBar';
 import { validateBarFormat, validateValueOptions } from './validate';
-import { ProgressBarOptions } from './interfaces';
-import { defaultOptions } from './defaultOptions';
 
-export function progressBar(options?: RecursivePartial<ProgressBarOptions>) {
-  const { length, valuePosition, valueOptions, barFormat } = extractOptions(options)
+export function progressBar(options?: RecursivePartial<ProgressBarOptions> | RecursivePartial<MultiValuesProgressBarOptions>) {
+  const { length, textPosition, textStyle, valueOptions, bar } = extractOptions(options)
   return {
-    render(value: number) {
-      if (value > valueOptions.max) throw new CurrentValueOutOfBound(value)
-      return renderBar({ length, valuePosition, barFormat }, { value, ...valueOptions })
+    render(...values: number[]) {
+      const entries = values.map((value, i) => ({ value, ...(valueOptions[i] || defaultValueOptions) }))
+
+      return renderBar({ bar, length, textPosition, textStyle }, ...entries)
     }
   }
 }
 
-function extractOptions(options?: RecursivePartial<ProgressBarOptions>) {
-  const { length, valuePosition, valueOptions, barFormat } = unpartialRecursively(defaultOptions, options)
-  validateBarFormat(barFormat)
-  validateValueOptions(valueOptions)
+function extractOptions(options?: RecursivePartial<ProgressBarOptions> | RecursivePartial<MultiValuesProgressBarOptions>) {
+  const { length, textPosition, textStyle, bar } = unpartialRecursively(defaultBaseOptions, options)
+  validateBarFormat(bar)
+
+  const valueOptions: ValueOptions[] = []
+  if (options) {
+    if (isSingleValueOptions(options)) {
+      const o = unpartial(defaultValueOptions, options.value)
+      validateValueOptions(o)
+      valueOptions.push(o)
+    }
+    else if (isMultiValueOptions(options)) {
+      valueOptions.push(...options.values.map(v => unpartial(defaultValueOptions, v)))
+      valueOptions.forEach(validateValueOptions)
+    }
+  }
+
   return {
+    bar,
     length,
-    valuePosition,
-    barFormat,
+    textPosition,
+    textStyle,
     valueOptions
   }
+}
+
+function isSingleValueOptions(options: any): options is ProgressBarOptions {
+  return options.value
+}
+
+function isMultiValueOptions(options: any): options is MultiValuesProgressBarOptions {
+  return options.values
 }
