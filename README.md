@@ -18,12 +18,12 @@ Create a string based progress bar.
 ```ts
 import { progressBar } from 'progress-str'
 
-const progress = progressBar()
+const bar = progressBar()
 
-progress.render(0.5)          // [------------|-----------] 50%
+bar.render(0.5)          // [------------|-----------] 50%
 
 // Also support multiple values
-progress.render(0.25, 0.5, 1) // [----|--|------|] 25% 50% 100%
+bar.render(0.25, 0.5, 1) // [----|--|------|] 25% 50% 100%
 ```
 
 ## Configure
