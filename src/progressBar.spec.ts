@@ -1,6 +1,7 @@
 import t from 'assert';
 import a from 'assertron';
-import { MaxValueOutOfBound, progressBar, InvalidMarker } from '.';
+import chalk from 'chalk';
+import { InvalidMarker, MaxValueOutOfBound, progressBar } from '.';
 import { assertRendering } from './asserts';
 import { LengthTooShort } from './errors';
 
@@ -32,6 +33,12 @@ test('text style can be ratio', () => {
   const bar = progressBar({ textStyle: 'ratio' })
   const actual = bar.render(0.5)
   assertRendering(actual, '[-----------|----------] 0.5/1')
+})
+
+test('use textTransform to change color', () => {
+  const bar = progressBar({ textStyle: 'ratio', textTransform: text => chalk.cyan(text) })
+  const actual = bar.render(0.5)
+  assertRendering(actual, `[-----------|----------] ${chalk.cyan('0.5/1')}`)
 })
 
 test('percentage by default rounds to the whole number', () => {
@@ -89,13 +96,48 @@ test(`incomplete marker, value marker, and completed marker are customizable`, (
   assertRendering(actual, '[============*           ] 50%')
 })
 
-test('marker can only be a single character (string of length 1)', () => {
+test('incomplete, completed, and value marker can only be a single character (string of length 1)', () => {
   a.throws(() => progressBar({ bar: { incompleteMarker: 'ab' } }), InvalidMarker)
   a.throws(() => progressBar({ bar: { incompleteMarker: '' } }), InvalidMarker)
   a.throws(() => progressBar({ bar: { completedMarker: 'ab' } }), InvalidMarker)
   a.throws(() => progressBar({ bar: { completedMarker: '' } }), InvalidMarker)
   a.throws(() => progressBar({ value: { marker: 'ab' } }), InvalidMarker)
   a.throws(() => progressBar({ value: { marker: '' } }), InvalidMarker)
+})
+
+test(`left bracket and right bracket are defaulted to '[' ']'`, () => {
+  const bar = progressBar()
+  const actual = bar.render(0.5)
+  assertRendering(actual, '[------------|-----------] 50%')
+})
+
+test(`left bracket and right bracket can be customized`, () => {
+  const bar = progressBar({ bar: { leftBracketMarker: '(', rightBracketMarker: '}' } })
+  const actual = bar.render(0.5)
+  assertRendering(actual, '(------------|-----------} 50%')
+})
+
+test(`left bracket and right bracket can be empty string`, () => {
+  const bar = progressBar({ bar: { leftBracketMarker: '', rightBracketMarker: '' } })
+  const actual = bar.render(0.5)
+  assertRendering(actual, '-------------|------------ 50%')
+})
+
+test('markers can be colored', () => {
+  const leftBracketMarker = chalk.magenta('[')
+  const rightBracketMarker = chalk.redBright('}')
+  const completedMarker = chalk.green('=')
+  const incompleteMarker = chalk.red('=')
+  const marker = chalk.yellow('|')
+  const bar = progressBar({
+    bar: {
+      leftBracketMarker,
+      rightBracketMarker,
+      completedMarker,
+      incompleteMarker
+    }, value: { marker }
+  })
+  assertRendering(bar.render(0.5), `${leftBracketMarker}${completedMarker}${completedMarker}${completedMarker}${completedMarker}${completedMarker}${completedMarker}${completedMarker}${completedMarker}${completedMarker}${completedMarker}${completedMarker}${completedMarker}${marker}${incompleteMarker}${incompleteMarker}${incompleteMarker}${incompleteMarker}${incompleteMarker}${incompleteMarker}${incompleteMarker}${incompleteMarker}${incompleteMarker}${incompleteMarker}${incompleteMarker}${rightBracketMarker} 50%`)
 })
 
 test('if only specify one value marker, it will be used on all values', () => {

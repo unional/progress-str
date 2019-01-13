@@ -2,7 +2,9 @@ import { BaseOptions } from './interfaces';
 import { ValueEntry } from './ValueEntry';
 
 export function renderText(baseOptions: BaseOptions, entries: ValueEntry[]) {
-  return entries.map(e => formatText(baseOptions, e)).join(' ')
+  return baseOptions.textTransform ?
+    entries.map(e => baseOptions.textTransform!(formatText(baseOptions, e))).join(' ') :
+    entries.map(e => formatText(baseOptions, e)).join(' ')
 }
 function formatText(options: Pick<BaseOptions, 'textStyle'>, entry: ValueEntry) {
   switch (options.textStyle) {

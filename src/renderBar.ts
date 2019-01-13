@@ -2,12 +2,13 @@ import { BarFormat, BaseOptions } from './interfaces';
 import { renderText } from './renderText';
 import { ValueEntry } from './ValueEntry';
 import { calcBarLength } from './calcBarLength';
+import stringLength from 'string-length'
 
 export function renderBar(baseOptions: BaseOptions, entries: ValueEntry[]) {
 
   const percentStr = renderText(baseOptions, entries)
 
-  const barLength = calcBarLength(baseOptions.length, percentStr.length)
+  const barLength = calcBarLength(baseOptions.length, stringLength(percentStr))
   const bar = toBar(barLength, baseOptions.bar, entries)
 
   return baseOptions.textPosition === 'left' ? `${percentStr} ${bar}` : `${bar} ${percentStr}`
@@ -15,11 +16,10 @@ export function renderBar(baseOptions: BaseOptions, entries: ValueEntry[]) {
 
 
 function toBar(length: number, format: BarFormat, entries: ValueEntry[]) {
-  const bracketLength = 1
-  const barInsideLength = length - bracketLength * 2
+  const barInsideLength = length - stringLength(format.leftBracketMarker) - stringLength(format.rightBracketMarker)
   const normalizedEntries = entries.map(e => ({ ...e, value: e.value / e.max }))
   const bar = createBarArray(normalizedEntries, format, barInsideLength)
-  return `[${bar.join('')}]`
+  return `${format.leftBracketMarker}${bar.join('')}${format.rightBracketMarker}`
 }
 
 function createBarArray(entries: ValueEntry[], { completedMarker, incompleteMarker }: BarFormat, length: number) {
