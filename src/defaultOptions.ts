@@ -8,11 +8,12 @@ export const defaultBaseOptions: BaseOptions = {
     incompleteMarker: '-'
   },
   length: 30,
-  textPosition: 'right',
-  textStyle: 'percentage'
+  // textAlign: 'left',
+  textPosition: 'right'
 }
 
 export const defaultValueOptions: ValueOptions = {
   max: 1,
-  marker: '|'
+  marker: '|',
+  textStyle: 'percentage'
 }

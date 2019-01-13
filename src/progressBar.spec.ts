@@ -24,19 +24,19 @@ test('text style defaults to percentage', () => {
 })
 
 test('text style can be number', () => {
-  const bar = progressBar({ textStyle: 'number' })
+  const bar = progressBar({ value: { textStyle: 'number' } })
   const actual = bar.render(0.5)
   assertRendering(actual, '[------------|-----------] 0.5')
 })
 
 test('text style can be ratio', () => {
-  const bar = progressBar({ textStyle: 'ratio' })
+  const bar = progressBar({ value: { textStyle: 'ratio' } })
   const actual = bar.render(0.5)
   assertRendering(actual, '[-----------|----------] 0.5/1')
 })
 
 test('use textTransform to change color', () => {
-  const bar = progressBar({ textStyle: 'ratio', textTransform: text => chalk.cyan(text) })
+  const bar = progressBar({ value: { textStyle: 'ratio', textTransform: text => chalk.cyan(text) } })
   const actual = bar.render(0.5)
   assertRendering(actual, `[-----------|----------] ${chalk.cyan('0.5/1')}`)
 })
@@ -48,21 +48,22 @@ test('percentage by default rounds to the whole number', () => {
 })
 
 test('for number style, when max is less than or equal to 1, value is rounded to 1/10 of the max value', () => {
-  assertRendering(progressBar({ textStyle: 'number' }).render(0.512), '[------------|-----------] 0.5')
-  assertRendering(progressBar({ textStyle: 'number', value: { max: 0.54 } }).render(0.2234), '[---------|------------] 0.223')
+  // assertRendering(progressBar({ textStyle: 'number' }).render(1), '[-----------------------|] 1  ')
+  assertRendering(progressBar({ value: { textStyle: 'number' } }).render(0.512), '[------------|-----------] 0.5')
+  assertRendering(progressBar({ value: { max: 0.54, textStyle: 'number' } }).render(0.2234), '[---------|------------] 0.223')
 })
 
 test('for number style, when max is greater than 1, value is rounded to the whole number', () => {
-  assertRendering(progressBar({ textStyle: 'number', value: { max: 100 } }).render(51.2), '[------------|------------] 51')
+  assertRendering(progressBar({ value: { max: 100, textStyle: 'number' } }).render(51.2), '[------------|------------] 51')
 })
 
 test('for ratio style, when max is less than or equal to 1, value is rounded to 1/10 of the max value', () => {
-  assertRendering(progressBar({ textStyle: 'ratio' }).render(0.512), '[-----------|----------] 0.5/1')
-  assertRendering(progressBar({ textStyle: 'ratio', value: { max: 0.54 } }).render(0.2234), '[-------|---------] 0.223/0.54')
+  assertRendering(progressBar({ value: { textStyle: 'ratio' } }).render(0.512), '[-----------|----------] 0.5/1')
+  assertRendering(progressBar({ value: { max: 0.54, textStyle: 'ratio' } }).render(0.2234), '[-------|---------] 0.223/0.54')
 })
 
 test('for ratio style, when max is greater than 1, value is rounded to the whole number', () => {
-  assertRendering(progressBar({ textStyle: 'ratio', value: { max: 100 } }).render(51.2), '[----------|----------] 51/100')
+  assertRendering(progressBar({ value: { max: 100, textStyle: 'ratio' } }).render(51.2), '[----------|----------] 51/100')
 })
 test('digits of the text can be customized', () => {
   assertRendering(progressBar({ value: { digits: 1 } }).render(0.5), '[-----------|----------] 50.0%')
@@ -71,10 +72,10 @@ test('digits of the text can be customized', () => {
     progressBar({ value: { digits: 2 } }).render(0.515),
     '[----------|----------] 51.50%')
   assertRendering(
-    progressBar({ value: { digits: 2 }, textStyle: 'number' }).render(0.515),
+    progressBar({ value: { digits: 2, textStyle: 'number' } }).render(0.515),
     '[-----------|-----------] 0.52')
   assertRendering(
-    progressBar({ value: { digits: 2 }, textStyle: 'ratio' }).render(0.515),
+    progressBar({ value: { digits: 2, textStyle: 'ratio' } }).render(0.515),
     '[----------|----------] 0.52/1')
 })
 
@@ -207,7 +208,6 @@ test('single max value applies to all values', () => {
   const actual = bar.render(5, 10)
   assertRendering(actual, '[---------|--------|] 50% 100%')
 })
-
 
 test('same value overlaps, first value take precedent', () => {
   const bar = progressBar({ value: [{ marker: '|' }, { marker: '*' }] })

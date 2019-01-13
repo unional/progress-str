@@ -6,9 +6,9 @@ import { renderBar } from './renderBar';
 import { validateBarFormat, validateLength, validateValueOptions } from './validate';
 
 export function progressBar(options?: RecursivePartial<ProgressBarOptions>): ProgressBar {
-  const { length, textPosition, textStyle, textTransform, valueOptions, bar, defaultValueOptions } = extractOptions(options)
+  const { length, textPosition, valueOptions, bar, defaultValueOptions } = extractOptions(options)
 
-  const baseOption = { bar, length, textPosition, textStyle, textTransform }
+  const baseOption = { bar, length, textPosition }
 
   validateLength(baseOption, [{ value: defaultValueOptions.max, ...defaultValueOptions }])
 
@@ -27,7 +27,7 @@ export function progressBar(options?: RecursivePartial<ProgressBarOptions>): Pro
 }
 
 function extractOptions(options?: RecursivePartial<ProgressBarOptions>) {
-  const { bar, length, textPosition, textStyle, textTransform } = unpartialRecursively(defaultBaseOptions, options)
+  const { bar, length, textPosition } = unpartialRecursively(defaultBaseOptions, options)
   validateBarFormat(bar)
 
   const valueOptions: ValueOptions[] = []
@@ -35,9 +35,8 @@ function extractOptions(options?: RecursivePartial<ProgressBarOptions>) {
   const result = {
     bar,
     length,
+    // textAlign,
     textPosition,
-    textStyle,
-    textTransform,
     valueOptions,
     defaultValueOptions
   }
