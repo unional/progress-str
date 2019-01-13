@@ -169,8 +169,8 @@ test('when creating the progress bar, if total length causes the bar to be short
   a.throws(() => progressBar({ length: 12, value: { digits: 2 } }), LengthTooShort)
 })
 
-test('when rendering, if total length causes the bar to be shorter than 3 characters long, it will throws LengthTooShort', () => {
-  a.throws(() => progressBar({ length: 12 }).render(0.1, 0.2), LengthTooShort)
+test(`when rendering, if total length causes the bar to be shorter than 3 characters long, render 'length too short'`, () => {
+  t.strictEqual(progressBar({ length: 12 }).render(0.1, 0.2), 'length 12 is too short to render 2 values')
 })
 
 test('max value is default to 1', () => {

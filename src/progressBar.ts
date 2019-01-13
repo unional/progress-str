@@ -10,12 +10,17 @@ export function progressBar(options?: RecursivePartial<ProgressBarOptions>) {
 
   const baseOption = { bar, length, textPosition, textStyle, textTransform }
 
-  validateLength(baseOption, [defaultValueOptions])
+  validateLength(baseOption, [{ value: defaultValueOptions.max, ...defaultValueOptions }])
 
   return {
     render(...values: number[]) {
       const entries = values.map((value, i) => ({ value, ...(valueOptions[i] || defaultValueOptions) }))
-      validateLength(baseOption, entries)
+      try {
+        validateLength(baseOption, entries)
+      }
+      catch (e) {
+        return e.message
+      }
       return renderBar(baseOption, entries)
     }
   }

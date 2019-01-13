@@ -14,7 +14,10 @@ export class InvalidMarker extends BaseError {
 
 export class LengthTooShort extends BaseError {
   constructor(public length: number, numberOfValues: number) {
-    super(`length ${length} is too short to render ${numberOfValues} value${numberOfValues > 1 ? 's' : ''}`)
+    super(getlengthTooShortMessage(length, numberOfValues))
   }
 }
 
+export function getlengthTooShortMessage(length: number, numberOfValues: number) {
+  return `length ${length} is too short to render ${numberOfValues} value${numberOfValues > 1 ? 's' : ''}`
+}
