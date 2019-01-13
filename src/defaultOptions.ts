@@ -11,7 +11,6 @@ export const defaultBaseOptions: BaseOptions = {
 }
 
 export const defaultValueOptions: ValueOptions = {
-  digits: 1,
   max: 1,
   marker: '|'
 }

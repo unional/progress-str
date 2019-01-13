@@ -11,7 +11,7 @@
 [![Visual Studio Code][vscode-image]][vscode-url]
 [![Wallaby.js][wallaby-image]][wallaby-url]
 
-Create a string based progress bar
+Create a string based progress bar.
 
 ## Usage
 
@@ -20,10 +20,10 @@ import { progressBar } from 'progress-str'
 
 const progress = progressBar()
 
-progress.render(0.5)       // [-----------|----------] 50.0%
+progress.render(0.5)          // [------------|-----------] 50%
 
 // Also support multiple values
-progress.render(0, 0.5, 1) // [|----|---|] 0.0% 50.0% 100.0%
+progress.render(0.25, 0.5, 1) // [----|--|------|] 25% 50% 100%
 ```
 
 ## Configure
@@ -38,13 +38,13 @@ progressBar({
   textPosition: 'right', // 'left' | 'right'
   textStyle: 'percentage', // 'percentage' | 'number' | 'ratio'
   value: {
-    digits: 1 // number of fraction digits. 0 | 1 | 2
+    digits: 1 // number of fraction digits. 0 | 1 | 2. It defaults to different values depending on the max value.
     max: 1, // Value that means 100%
     marker: '|' // marker for the value
   }
 })
 
-// To style multiple values
+// To style multiple values differently.
 progressBar({
   ...
   values: [{ ... }, { ... }, ...]
