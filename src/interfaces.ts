@@ -6,17 +6,24 @@ export type BarFormat = {
 }
 
 export type ValueOptions = {
-  max: number
-  marker: string,
   digits?: 0 | 1 | 2
+  max: number
+  marker: string
+  textStyle: 'percentage' | 'number' | 'ratio'
+  textTransform?: (text: string) => string
 }
 
 export type BaseOptions = {
   bar: BarFormat
   length: number
+  /**
+   * Position of the text relative to the bar.
+   */
   textPosition: 'left' | 'right'
-  textStyle: 'percentage' | 'number' | 'ratio'
-  textTransform?: (text: string) => string
+  /**
+   * Alignment of the text. left: '10__', right: '__10'
+   */
+  // textAlign: 'left' | 'right'
 }
 
 export type ProgressBarOptions = BaseOptions & {
