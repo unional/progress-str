@@ -20,7 +20,10 @@ import { progressBar } from 'progress-str'
 
 const progress = progressBar()
 
-progress.render(0.5) // [-----------|----------] 50.0%
+progress.render(0.5)       // [-----------|----------] 50.0%
+
+// Also support multiple values
+progress.render(0, 0.5, 1) // [|----|---|] 0.0% 50.0% 100.0%
 ```
 
 ## Configure
