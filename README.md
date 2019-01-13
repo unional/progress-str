@@ -33,10 +33,13 @@ progressBar({
   bar: {
     completedMarker: '-', // marker for completed section of the bar
     incompleteMarker: '-' // marker for incomplete section of the bar
+    leftBracketMarker: '['
+    rightBracketMarker: ']'
   },
   length: 30, // total length of the result, including the text
   textPosition: 'right', // 'left' | 'right'
   textStyle: 'percentage', // 'percentage' | 'number' | 'ratio'
+  textTransform(text: string): string, // transform the styled string, can use this to color the text
   value: {
     digits: 1 // number of fraction digits. 0 | 1 | 2. It defaults to different values depending on the max value.
     max: 1, // Value that means 100%

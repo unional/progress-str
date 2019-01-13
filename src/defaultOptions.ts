@@ -2,6 +2,8 @@ import { BaseOptions, ValueOptions } from './interfaces';
 
 export const defaultBaseOptions: BaseOptions = {
   bar: {
+    leftBracketMarker: '[',
+    rightBracketMarker: ']',
     completedMarker: '-',
     incompleteMarker: '-'
   },

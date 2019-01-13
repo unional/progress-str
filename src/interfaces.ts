@@ -1,4 +1,6 @@
 export type BarFormat = {
+  leftBracketMarker: string,
+  rightBracketMarker: string,
   completedMarker: string
   incompleteMarker: string
 }
@@ -14,6 +16,7 @@ export type BaseOptions = {
   length: number
   textPosition: 'left' | 'right'
   textStyle: 'percentage' | 'number' | 'ratio'
+  textTransform?: (text: string) => string
 }
 
 export type ProgressBarOptions = BaseOptions & {
