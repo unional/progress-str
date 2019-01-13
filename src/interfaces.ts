@@ -22,3 +22,7 @@ export type BaseOptions = {
 export type ProgressBarOptions = BaseOptions & {
   value: ValueOptions | ValueOptions[]
 }
+
+export type ProgressBar = {
+  render(...values: number[]): string
+}
