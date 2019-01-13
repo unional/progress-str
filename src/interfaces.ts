@@ -6,7 +6,7 @@ export type BarFormat = {
 export type ValueOptions = {
   max: number
   marker: string,
-  digits: 0 | 1 | 2
+  digits?: 0 | 1 | 2
 }
 
 export type BaseOptions = {
@@ -17,9 +17,5 @@ export type BaseOptions = {
 }
 
 export type ProgressBarOptions = BaseOptions & {
-  value: ValueOptions
-}
-
-export type MultiValuesProgressBarOptions = BaseOptions & {
-  values: ValueOptions[]
+  value: ValueOptions | ValueOptions[]
 }

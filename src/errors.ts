@@ -1,5 +1,4 @@
 import { BaseError } from 'make-error';
-import { tersify } from 'tersify';
 
 export class MaxValueOutOfBound extends BaseError {
   constructor(public value: number) {
@@ -7,8 +6,15 @@ export class MaxValueOutOfBound extends BaseError {
   }
 }
 
-export class StringTooLong extends BaseError {
-  constructor(public name: string, public value: string, public maxLength: number) {
-    super(`'${name}' (${tersify(value, { maxLength: 10 })}) length is longer than expected (${maxLength})`)
+export class InvalidMarker extends BaseError {
+  constructor(public marker: string) {
+    super(`Marker must be a single character. Received '${marker}'`)
   }
 }
+
+export class LengthTooShort extends BaseError {
+  constructor(public length: number, numberOfValues: number) {
+    super(`length ${length} is too short to render ${numberOfValues} value${numberOfValues > 1 ? 's' : ''}`)
+  }
+}
+

@@ -1,29 +1,18 @@
-import { BarFormat, BaseOptions, ValueOptions } from './interfaces';
+import { BarFormat, BaseOptions } from './interfaces';
+import { renderText } from './renderText';
+import { ValueEntry } from './ValueEntry';
+import { calcBarLength } from './calcBarLength';
 
+export function renderBar(baseOptions: BaseOptions, entries: ValueEntry[]) {
 
-export type ValueEntry = ValueOptions & { value: number }
+  const percentStr = renderText(baseOptions, entries)
 
-
-export function renderBar(baseOptions: BaseOptions, ...entries: ValueEntry[]) {
-
-  const percentStr = entries.map(e => formatText(baseOptions, e)).join(' ')
-
-  const spaceLength = 1
-  const bar = toBar(baseOptions.length - percentStr.length - spaceLength, baseOptions.bar, entries)
+  const barLength = calcBarLength(baseOptions.length, percentStr.length)
+  const bar = toBar(barLength, baseOptions.bar, entries)
 
   return baseOptions.textPosition === 'left' ? `${percentStr} ${bar}` : `${bar} ${percentStr}`
 }
 
-function formatText(options: Pick<BaseOptions, 'textStyle'>, entry: ValueEntry) {
-  switch (options.textStyle) {
-    case 'percentage':
-      return `${(entry.value / entry.max * 100).toFixed(entry.digits)}%`
-    case 'number':
-      return (entry.value).toFixed(entry.digits)
-    case 'ratio':
-      return `${entry.value.toFixed(entry.digits)}/${entry.max}`
-  }
-}
 
 function toBar(length: number, format: BarFormat, entries: ValueEntry[]) {
   const bracketLength = 1

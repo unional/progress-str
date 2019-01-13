@@ -1,12 +1,21 @@
-import { MaxValueOutOfBound, StringTooLong } from './errors';
-import { BarFormat, ValueOptions } from './interfaces';
+import { calcBarLength } from './calcBarLength';
+import { InvalidMarker, LengthTooShort, MaxValueOutOfBound } from './errors';
+import { BarFormat, BaseOptions, ValueOptions } from './interfaces';
+import { renderText } from './renderText';
 
 export function validateValueOptions(options: Partial<ValueOptions>) {
   if (options.max !== undefined && (options.max <= 0)) throw new MaxValueOutOfBound(options.max)
-  if (options.marker && options.marker.length > 1) throw new StringTooLong('value.char', options.marker, 1)
+  if (options.marker !== undefined && options.marker.length !== 1) throw new InvalidMarker(options.marker)
 }
 
 export function validateBarFormat(format: Partial<BarFormat>) {
-  if (format.incompleteMarker && format.incompleteMarker.length > 1) throw new StringTooLong('incompleteChar', format.incompleteMarker, 1)
-  if (format.completedMarker && format.completedMarker.length > 1) throw new StringTooLong('completedChar', format.completedMarker, 1)
+  if (format.incompleteMarker !== undefined && format.incompleteMarker.length !== 1) throw new InvalidMarker(format.incompleteMarker)
+  if (format.completedMarker !== undefined && format.completedMarker.length !== 1) throw new InvalidMarker(format.completedMarker)
+}
+
+export function validateLength(baseOption: BaseOptions, valueOptions: ValueOptions[]) {
+  const entries = valueOptions.map(o => ({ value: o.max, ...o }))
+  const text = renderText(baseOption, entries)
+  const len = calcBarLength(baseOption.length, text.length)
+  if (len < 5) throw new LengthTooShort(baseOption.length, entries.length)
 }
