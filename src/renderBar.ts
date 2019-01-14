@@ -18,14 +18,17 @@ export function renderBar(baseOptions: BaseOptions, entries: ValueEntry[]) {
 
 function toBar(length: number, format: BarFormat, entries: ValueEntry[]) {
   const barInsideLength = length - stringLength(format.leftBracketMarker) - stringLength(format.rightBracketMarker)
-  const normalizedEntries = entries.map(e => ({ ...e, value: Math.floor(Math.min(Math.max(e.value / e.max, 0), 1) * 100) / 100 }))
+  const normalizedEntries = entries.map(e => (
+    { ...e, value: e.value === undefined ? undefined : Math.floor(Math.min(Math.max(e.value / e.max, 0), 1) * 100) / 100 }
+  ))
   const bar = createBarArray(normalizedEntries, format, barInsideLength)
   return `${format.leftBracketMarker}${bar.join('')}${format.rightBracketMarker}`
 }
 
 function createBarArray(entries: ValueEntry[], { completedMarker, incompleteMarker }: BarFormat, length: number) {
   const sortedEntries = entries
-    .map(e => ({ ...e, value: e.value * length }))
+    .filter(e => e.value !== undefined)
+    .map(e => ({ ...e, value: e.value! * length }))
     .sort((a, b) => a.value - b.value)
 
   const bar: string[] = []

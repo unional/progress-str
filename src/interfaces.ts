@@ -31,5 +31,5 @@ export type ProgressBarOptions = BaseOptions & {
 }
 
 export type ProgressBar = {
-  render(...values: number[]): string
+  render(...values: (number | undefined)[]): string
 }

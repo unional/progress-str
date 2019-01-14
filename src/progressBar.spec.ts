@@ -17,6 +17,27 @@ test('can render one or more values', () => {
   assertRendering(bar.render(0.5, 0.25), '[----|---|---------] 50%  25% ')
 })
 
+describe('value can be unknown (undefined)', () => {
+  test('for percentage', () => {
+    const bar = progressBar()
+    assertRendering(bar.render(undefined), '[-----------------------] --- ')
+    assertRendering(bar.render(undefined, 0.5), '[--------|---------] ---  50% ')
+    assertRendering(bar.render(0.5, undefined), '[--------|---------] 50%  --- ')
+  })
+  test('for number', () => {
+    const bar = progressBar({ value: { textStyle: 'number' } })
+    assertRendering(bar.render(undefined), '[------------------------] ---')
+    assertRendering(bar.render(undefined, 0.5), '[---------|----------] --- 0.5')
+    assertRendering(bar.render(0.5, undefined), '[---------|----------] 0.5 ---')
+  })
+  test('for ratio', () => {
+    const bar = progressBar({ value: { textStyle: 'ratio' } })
+    assertRendering(bar.render(undefined), '[----------------------] ---/1')
+    assertRendering(bar.render(undefined, 0.5), '[-------|--------] ---/1 0.5/1')
+    assertRendering(bar.render(0.5, undefined), '[-------|--------] 0.5/1 ---/1')
+  })
+})
+
 test('text style defaults to percentage', () => {
   const bar = progressBar()
   const actual = bar.render(0.5)
