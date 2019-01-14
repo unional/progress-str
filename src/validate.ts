@@ -16,6 +16,7 @@ export function validateBarFormat(format: Partial<BarFormat>) {
 
 export function validateLength(baseOption: BaseOptions, entries: ValueEntry[]) {
   const len = calcBarLengthForEntries(baseOption, entries)
-  if (len < 3 + stringLength(baseOption.bar.leftBracketMarker) + stringLength(baseOption.bar.rightBracketMarker))
+  const barInsideMinWidth = 3 // So that we can show at least start '|--', middle '-|-', and end '--|'
+  if (len < barInsideMinWidth + stringLength(baseOption.bar.leftBracketMarker) + stringLength(baseOption.bar.rightBracketMarker))
     throw new LengthTooShort(baseOption.length, entries.length)
 }

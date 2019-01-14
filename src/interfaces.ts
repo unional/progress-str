@@ -19,7 +19,7 @@ export type BaseOptions = {
   /**
    * Position of the text relative to the bar.
    */
-  textPosition: 'left' | 'right'
+  textPosition: 'left' | 'right' | 'none'
   /**
    * Alignment of the text. left: '10__', right: '__10'
    */

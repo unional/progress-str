@@ -37,7 +37,8 @@ progressBar({
     rightBracketMarker: ']'
   },
   length: 30, // total length of the result, including the text
-  textPosition: 'right', // 'left' | 'right'
+  textAlign: 'left', // align text relative to max possible text length of each entry.
+  textPosition: 'right', // 'left' | 'right' | 'none'
   value: {
     digits: 1 // number of fraction digits. 0 | 1 | 2.
               // It defaults to different values depending on the max value.
