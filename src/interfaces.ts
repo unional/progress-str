@@ -23,7 +23,7 @@ export type BaseOptions = {
   /**
    * Alignment of the text. left: '10__', right: '__10'
    */
-  // textAlign: 'left' | 'right'
+  textAlign: 'left' | 'right'
 }
 
 export type ProgressBarOptions = BaseOptions & {

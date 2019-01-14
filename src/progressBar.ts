@@ -7,7 +7,7 @@ import { validateBarFormat, validateLength, validateValueOptions } from './valid
 import { createValueEntry } from './ValueEntry';
 
 export function progressBar(options?: RecursivePartial<ProgressBarOptions>): ProgressBar {
-  const { length, textPosition, textAlign, valueOptions, bar, defaultValueOptions } = extractOptions(options)
+  const { bar, length, textAlign, textPosition, valueOptions, defaultValueOptions } = extractOptions(options)
 
   const baseOption = { bar, length, textAlign, textPosition }
 
