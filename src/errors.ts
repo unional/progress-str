@@ -14,6 +14,12 @@ export class InvalidMarker extends BaseError {
 
 export class LengthTooShort extends BaseError {
   constructor(public length: number, numberOfValues: number) {
-    super(`length ${length} is too short to render ${numberOfValues} value${numberOfValues > 1 ? 's' : ''}`)
+    super(`Length ${length} is too short to render ${numberOfValues} value${numberOfValues > 1 ? 's' : ''}`)
+  }
+}
+
+export class MissingMaxValue extends BaseError {
+  constructor() {
+    super(`Value can only be 'undefined' if max is 'undefined'`)
   }
 }

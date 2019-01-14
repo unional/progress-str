@@ -3,7 +3,7 @@ import a from 'assertron';
 import chalk from 'chalk';
 import { InvalidMarker, MaxValueOutOfBound, progressBar } from '.';
 import { assertRendering } from './asserts';
-import { LengthTooShort } from './errors';
+import { LengthTooShort, MissingMaxValue } from './errors';
 
 test('can create progress bar without options', () => {
   progressBar()
@@ -246,7 +246,7 @@ test('when creating the progress bar, if total length causes the bar to be short
 })
 
 test(`when rendering, if total length causes the bar to be shorter than 3 characters long, render 'length too short'`, () => {
-  t.strictEqual(progressBar({ length: 13 }).render(0.1, 0.2), 'length 13 is too short to render 2 values')
+  t.strictEqual(progressBar({ length: 13 }).render(0.1, 0.2), 'Length 13 is too short to render 2 values')
 })
 
 test('max value is default to 1', () => {
@@ -275,6 +275,25 @@ test('max value is customizable', () => {
 test('max value must be greater than 0', () => {
   a.throws(() => progressBar({ value: { max: 0 } }), MaxValueOutOfBound)
   a.throws(() => progressBar({ value: { max: -1 } }), MaxValueOutOfBound)
+})
+
+describe('max can be undefined, meaning it is unknown', () => {
+  test('for percentage', () => {
+    const bar = progressBar({ value: { max: undefined } })
+    assertRendering(bar.render(undefined), '[-----------------------] --- ')
+  })
+  test('for number', () => {
+    const bar = progressBar({ value: { max: undefined, textStyle: 'number' } })
+    assertRendering(bar.render(undefined), '[------------------------] ---')
+  })
+  test('for ratio', () => {
+    const bar = progressBar({ value: { max: undefined, textStyle: 'ratio' } })
+    assertRendering(bar.render(undefined), '[--------------------] ---/---')
+  })
+  test('if value is not undefined throws', () => {
+    const bar = progressBar({ value: { max: undefined } })
+    a.throws(() => bar.render(0.5), MissingMaxValue)
+  })
 })
 
 test('single max value applies to all values', () => {
