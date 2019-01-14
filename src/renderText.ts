@@ -1,7 +1,7 @@
+import leftPad from 'left-pad';
+import rightPad from 'right-pad';
 import { BaseOptions } from './interfaces';
 import { ValueEntry } from './ValueEntry';
-import leftPad from 'left-pad'
-import rightPad from 'right-pad'
 
 export function renderText(baseOptions: BaseOptions, entries: ValueEntry[]) {
   return entries.map(e => renderEntry(baseOptions.textAlign, e)).join(' ')
