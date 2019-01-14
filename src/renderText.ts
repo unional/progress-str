@@ -13,12 +13,20 @@ function renderEntry(align: 'left' | 'right', entry: ValueEntry) {
 }
 
 function formatText(entry: ValueEntry) {
+
   switch (entry.textStyle) {
     case 'percentage':
-      return `${(entry.value / entry.max * 100).toFixed(entry.actualDigits)}%`
+      return entry.value === undefined ?
+        '---' :
+        `${(entry.value / entry.max * 100).toFixed(entry.actualDigits)}%`
     case 'number':
-      return entry.value.toFixed(entry.actualDigits)
+      return entry.value === undefined ?
+        '---' :
+        entry.value.toFixed(entry.actualDigits)
     case 'ratio':
-      return `${entry.value.toFixed(entry.actualDigits)}/${entry.digits !== undefined ? entry.max.toFixed(entry.actualDigits) : entry.max}`
+      const max = entry.digits !== undefined ? entry.max.toFixed(entry.actualDigits) : entry.max
+      return entry.value === undefined ?
+        `---/${max}` :
+        `${entry.value.toFixed(entry.actualDigits)}/${max}`
   }
 }

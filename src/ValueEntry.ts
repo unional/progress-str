@@ -2,7 +2,7 @@ import stringLength from 'string-length';
 import { getLongestSampleText, calcMaxDigits } from './calcDigits';
 import { ValueOptions } from './interfaces';
 
-export type ValueEntry = ValueOptions & { value: number, actualDigits: number, maxLength: number }
+export type ValueEntry = ValueOptions & { value: number | undefined, actualDigits: number, maxLength: number }
 
 export function createValueEntry(options: ValueOptions, value: number): ValueEntry {
   const actualDigits = calcMaxDigits(options)

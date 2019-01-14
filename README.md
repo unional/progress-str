@@ -24,6 +24,9 @@ bar.render(0.5)          // [------------|-----------] 50%
 
 // Also support multiple values
 bar.render(0.25, 0.5, 1) // [----|--|------|] 25% 50% 100%
+
+// If the value is unknown/not available, pass in undefined:
+bar.render(0.5, undefined) // [---------|----------] 0.5 ---
 ```
 
 ## Configure
