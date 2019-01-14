@@ -1,4 +1,4 @@
-import { BaseOptions, ValueOptions } from './interfaces';
+import { BaseOptions, TextStyle } from './interfaces';
 
 export const defaultBaseOptions: BaseOptions = {
   bar: {
@@ -12,8 +12,8 @@ export const defaultBaseOptions: BaseOptions = {
   textPosition: 'right'
 }
 
-export const defaultValueOptions: ValueOptions = {
+export const defaultValueOptions = {
   max: 1,
   marker: '|',
-  textStyle: 'percentage'
+  textStyle: 'percentage' as TextStyle
 }

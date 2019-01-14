@@ -45,7 +45,10 @@ progressBar({
   value: {
     digits: 1 // number of fraction digits. 0 | 1 | 2.
               // It defaults to different values depending on the max value.
-    max: 1, // Value that means 100%
+    max: 1, // Value that means 100%.
+            // It can be set to undefined, to indicate that value is not available.
+            // But the render value must also be undefined.
+            // If not it will throws MissingMaxValue.
     marker: '|', // marker for the value
     textStyle: 'percentage', // 'percentage' | 'number' | 'ratio'
     textTransform(text: string): string, // transform the styled string, can use this to color the text

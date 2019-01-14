@@ -5,26 +5,27 @@ export function getLongestSampleText(options: ValueOptions, actualDigits: number
     case 'percentage':
       return `${addDigits(100, actualDigits)}%`
     case 'number':
-      if (hasDecimal(options.max)) {
-        const round = Math.trunc(options.max)
+      const max = options.max === undefined ? 1 : options.max
+      if (hasDecimal(max)) {
+        const round = Math.trunc(max)
         return `${addDigits(round, actualDigits)}`
       }
-      else if (options.max === 1) {
+      else if (max === 1) {
         return `${addDigits(0, actualDigits)}`
       }
       else {
-        return `${addDigits(options.max, actualDigits)}`
+        return `${addDigits(max, actualDigits)}`
       }
     case 'ratio':
       if (hasDecimal(options.max)) {
-        const round = Math.trunc(options.max)
-        return `${addDigits(round, actualDigits)}/${options.digits !== undefined ? options.max.toFixed(actualDigits) : options.max}`
+        const round = Math.trunc(options.max!)
+        return `${addDigits(round, actualDigits)}/${options.max}`
       }
       else if (options.max === 1) {
         return `${addDigits(0, actualDigits)}/${addDigits(0, options.digits || 0)}`
       }
       else {
-        return `${addDigits(options.max, actualDigits)}/${options.max.toFixed(actualDigits)}`
+        return `${addDigits(options.max, actualDigits)}/${options.max === undefined ? '---' : options.max.toFixed(actualDigits)}`
       }
   }
 }
@@ -35,10 +36,11 @@ export function calcMaxDigits(options: ValueOptions) {
       return options.digits || 0
     case 'number':
     case 'ratio':
-      if (hasDecimal(options.max)) {
-        return options.digits || getDecimal(options.max) + 1
+      const max = options.max === undefined ? 1 : options.max
+      if (hasDecimal(max)) {
+        return options.digits || getDecimal(max) + 1
       }
-      else if (options.max === 1) {
+      else if (max === 1) {
         return options.digits || 1
       }
       else {
@@ -47,12 +49,14 @@ export function calcMaxDigits(options: ValueOptions) {
   }
 }
 
-function addDigits(value: number, digits: number) {
+function addDigits(value: number | undefined, digits: number) {
+  if (value === undefined) return '---'
   if (digits === 0) return value
   return value + (1 / (10 ** digits))
 }
 
-function hasDecimal(value: number) {
+function hasDecimal(value: number | undefined) {
+  if (value === undefined) return false
   return Math.trunc(value) !== value
 }
 

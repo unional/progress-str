@@ -5,11 +5,13 @@ export type BarFormat = {
   incompleteMarker: string
 }
 
+export type TextStyle = 'percentage' | 'number' | 'ratio'
+
 export type ValueOptions = {
   digits?: 0 | 1 | 2
-  max: number
+  max: number | undefined
   marker: string
-  textStyle: 'percentage' | 'number' | 'ratio'
+  textStyle: TextStyle
   textTransform?: (text: string) => string
 }
 

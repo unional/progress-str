@@ -3,9 +3,13 @@ import { renderText } from './renderText';
 import { ValueEntry } from './ValueEntry';
 import { calcBarLength } from './calcBarLength';
 import stringLength from 'string-length'
+import { MissingMaxValue } from './errors';
 
 export function renderBar(baseOptions: BaseOptions, entries: ValueEntry[]) {
   if (baseOptions.textPosition === 'none') return toBar(baseOptions.length, baseOptions.bar, entries)
+  entries.forEach(e => {
+    if (e.max === undefined && e.value !== undefined) throw new MissingMaxValue()
+  })
 
   const text = renderText(baseOptions, entries)
 
@@ -18,16 +22,21 @@ export function renderBar(baseOptions: BaseOptions, entries: ValueEntry[]) {
 
 function toBar(length: number, format: BarFormat, entries: ValueEntry[]) {
   const barInsideLength = length - stringLength(format.leftBracketMarker) - stringLength(format.rightBracketMarker)
-  const normalizedEntries = entries.map(e => (
-    { ...e, value: e.value === undefined ? undefined : Math.floor(Math.min(Math.max(e.value / e.max, 0), 1) * 100) / 100 }
-  ))
+  const normalizedEntries = entries.map(e => ({
+    ...e,
+    value: e.max === undefined ?
+      e.value :
+      e.value === undefined ?
+        undefined :
+        Math.floor(Math.min(Math.max(e.value / e.max, 0), 1) * 100) / 100
+  }))
   const bar = createBarArray(normalizedEntries, format, barInsideLength)
   return `${format.leftBracketMarker}${bar.join('')}${format.rightBracketMarker}`
 }
 
 function createBarArray(entries: ValueEntry[], { completedMarker, incompleteMarker }: BarFormat, length: number) {
   const sortedEntries = entries
-    .filter(e => e.value !== undefined)
+    .filter(e => e.value !== undefined && e.max !== undefined)
     .map(e => ({ ...e, value: e.value! * length }))
     .sort((a, b) => a.value - b.value)
 
