@@ -76,7 +76,7 @@ test('digits of the text can be customized', () => {
     '[-----------|-----------] 0.52')
   assertRendering(
     progressBar({ value: { digits: 2, textStyle: 'ratio' } }).render(0.515),
-    '[----------|----------] 0.52/1')
+    '[---------|--------] 0.52/1.00')
 })
 
 test('text can be positioned to the left', () => {
