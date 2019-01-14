@@ -8,7 +8,7 @@ export const defaultBaseOptions: BaseOptions = {
     incompleteMarker: '-'
   },
   length: 30,
-  // textAlign: 'left',
+  textAlign: 'left',
   textPosition: 'right'
 }
 

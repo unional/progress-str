@@ -1,12 +1,15 @@
 import { BaseOptions } from './interfaces';
 import { ValueEntry } from './ValueEntry';
+import leftPad from 'left-pad'
+import rightPad from 'right-pad'
 
 export function renderText(baseOptions: BaseOptions, entries: ValueEntry[]) {
-  return entries.map(e => renderEntry(e)).join(' ')
+  return entries.map(e => renderEntry(baseOptions.textAlign, e)).join(' ')
 }
-function renderEntry(entry: ValueEntry) {
-  const result = formatText(entry)
-  return entry.textTransform ? entry.textTransform(result) : result
+function renderEntry(align: 'left' | 'right', entry: ValueEntry) {
+  const formatted = formatText(entry)
+  const text = entry.textTransform ? entry.textTransform(formatted) : formatted
+  return align === 'left' ? rightPad(text, entry.maxLength) : leftPad(text, entry.maxLength)
 }
 
 function formatText(entry: ValueEntry) {

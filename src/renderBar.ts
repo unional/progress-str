@@ -6,38 +6,38 @@ import stringLength from 'string-length'
 
 export function renderBar(baseOptions: BaseOptions, entries: ValueEntry[]) {
 
-  const percentStr = renderText(baseOptions, entries)
+  const text = renderText(baseOptions, entries)
 
-  const barLength = calcBarLength(baseOptions.length, stringLength(percentStr))
+  const barLength = calcBarLength(baseOptions.length, stringLength(text))
   const bar = toBar(barLength, baseOptions.bar, entries)
 
-  return baseOptions.textPosition === 'left' ? `${percentStr} ${bar}` : `${bar} ${percentStr}`
+  return baseOptions.textPosition === 'left' ? `${text} ${bar}` : `${bar} ${text}`
 }
 
 
 function toBar(length: number, format: BarFormat, entries: ValueEntry[]) {
   const barInsideLength = length - stringLength(format.leftBracketMarker) - stringLength(format.rightBracketMarker)
-  const normalizedEntries = entries.map(e => ({ ...e, value: e.value / e.max }))
+  const normalizedEntries = entries.map(e => ({ ...e, value: Math.floor(Math.min(Math.max(e.value / e.max, 0), 1) * 100) / 100 }))
   const bar = createBarArray(normalizedEntries, format, barInsideLength)
   return `${format.leftBracketMarker}${bar.join('')}${format.rightBracketMarker}`
 }
 
 function createBarArray(entries: ValueEntry[], { completedMarker, incompleteMarker }: BarFormat, length: number) {
   const sortedEntries = entries
-    .map(e => ({ ...e, value: Math.round(Math.min(1, e.value) * (length - 1)) }))
+    .map(e => ({ ...e, value: e.value * length }))
     .sort((a, b) => a.value - b.value)
 
   const bar: string[] = []
   let i = 0
   while (sortedEntries.length) {
     const entry = sortedEntries.shift()!
-    while (i < entry.value) {
-      bar[i] = completedMarker
+    while (entry.value - i > 1) {
+      // don't mark completed if bar[i] is already marked by previous entry
+      if (!bar[i]) bar[i] = completedMarker
       i++
     }
-    if (i === entry.value) {
+    if (i !== length) {
       bar[i] = entry.marker
-      i++
     }
   }
 
