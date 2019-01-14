@@ -1,17 +1,4 @@
-import { ValueEntry } from './ValueEntry';
 import { ValueOptions } from './interfaces';
-
-export function calcDigits(entry: Pick<ValueEntry, 'textStyle' | 'digits' | 'max' | 'value'>) {
-  switch (entry.textStyle) {
-    case 'percentage':
-      return entry.digits || 0
-    case 'number':
-    case 'ratio':
-      return hasDecimal(entry.max) ?
-        entry.digits || getDecimal(entry.max) + 1 :
-        isValueAtMax(entry) ? 0 : 1
-  }
-}
 
 export function getLongestSampleText(options: ValueOptions, actualDigits: number) {
   switch (options.textStyle) {
@@ -71,8 +58,4 @@ function hasDecimal(value: number) {
 
 function getDecimal(value: number) {
   return (value - Math.trunc(value)).toString().length - 2
-}
-
-function isValueAtMax(entry: Pick<ValueEntry, 'max' | 'value'>) {
-  return entry.max === entry.value
 }
