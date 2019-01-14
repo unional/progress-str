@@ -55,7 +55,7 @@ progressBar({
 // To style multiple values differently.
 progressBar({
   ...
-  values: [{ ... }, { ... }, ...]
+  value: [{ ... }, { ... }, ...]
 })
 ```
 
