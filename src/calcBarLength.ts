@@ -9,6 +9,8 @@ export function calcBarLength(maxLength: number, textLength: number) {
 }
 
 export function calcBarLengthForEntries(baseOption: BaseOptions, entries: ValueEntry[]) {
+  if (baseOption.textPosition === 'none') return baseOption.length
+
   const text = renderText(baseOption, entries)
   return calcBarLength(baseOption.length, stringLength(text))
 }

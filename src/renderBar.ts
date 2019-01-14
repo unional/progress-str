@@ -5,6 +5,7 @@ import { calcBarLength } from './calcBarLength';
 import stringLength from 'string-length'
 
 export function renderBar(baseOptions: BaseOptions, entries: ValueEntry[]) {
+  if (baseOptions.textPosition === 'none') return toBar(baseOptions.length, baseOptions.bar, entries)
 
   const text = renderText(baseOptions, entries)
 

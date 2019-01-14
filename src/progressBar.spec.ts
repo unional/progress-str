@@ -86,6 +86,11 @@ test('text can be positioned to the left', () => {
   assertRendering(bar.render(0.5, 1), '50%  100% [--------|--------|]')
 })
 
+test(`will not show text if textPosition is 'none'`, () => {
+  const bar = progressBar({ textPosition: 'none' })
+  assertRendering(bar.render(0.5), '[-------------|--------------]')
+})
+
 describe('text can be align to the right', () => {
   test('for percentage positioned to the right', () => {
     const bar = progressBar({ textAlign: 'right' })
