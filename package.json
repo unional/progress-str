@@ -32,7 +32,7 @@
     "right-pad": "^1.0.1",
     "string-length": "^2.0.0",
     "type-plus": "^1.6.1",
-    "unpartial": "^0.5.0"
+    "unpartial": "^0.6.0"
   },
   "devDependencies": {
     "@unional/devpkg-node": "^1.2.2",
