@@ -1,7 +1,6 @@
-import { RecursivePartial } from 'type-plus';
-import { unpartial, unpartialRecursively } from 'unpartial';
+import { RecursivePartial, required, requiredDeep } from 'type-plus';
 import { defaultBaseOptions, defaultValueOptions } from './defaultOptions';
-import { ProgressBarOptions, ValueOptions, ProgressBar } from './interfaces';
+import { ProgressBar, ProgressBarOptions, ValueOptions } from './interfaces';
 import { renderBar } from './renderBar';
 import { validateBarFormat, validateLength, validateValueOptions } from './validate';
 import { createValueEntry } from './ValueEntry';
@@ -28,7 +27,7 @@ export function progressBar(options?: RecursivePartial<ProgressBarOptions>): Pro
 }
 
 function extractOptions(options?: RecursivePartial<ProgressBarOptions>) {
-  const { bar, length, textAlign, textPosition } = unpartialRecursively(defaultBaseOptions, options)
+  const { bar, length, textAlign, textPosition } = requiredDeep(defaultBaseOptions, options)
   validateBarFormat(bar)
 
   const valueOptions: ValueOptions[] = []
@@ -44,11 +43,11 @@ function extractOptions(options?: RecursivePartial<ProgressBarOptions>) {
 
   if (options && options.value) {
     if (Array.isArray(options.value)) {
-      valueOptions.push(...options.value.map(v => unpartial(defaultValueOptions, v)))
+      valueOptions.push(...options.value.map(v => required(defaultValueOptions, v)))
       valueOptions.forEach(validateValueOptions)
     }
     else {
-      result.defaultValueOptions = unpartial(defaultValueOptions, options.value)
+      result.defaultValueOptions = required(defaultValueOptions, options.value)
       validateValueOptions(result.defaultValueOptions)
     }
   }
