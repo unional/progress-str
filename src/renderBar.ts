@@ -1,9 +1,9 @@
+import stringLength from 'string-length';
+import { calcBarLength } from './calcBarLength';
+import { MissingMaxValue } from './errors';
 import { BarFormat, BaseOptions } from './interfaces';
 import { renderText } from './renderText';
 import { ValueEntry } from './ValueEntry';
-import { calcBarLength } from './calcBarLength';
-import stringLength from 'string-length'
-import { MissingMaxValue } from './errors';
 
 export function renderBar(baseOptions: BaseOptions, entries: ValueEntry[]) {
   if (baseOptions.textPosition === 'none') return toBar(baseOptions.length, baseOptions.bar, entries)
