@@ -43,7 +43,7 @@ progressBar({
   textAlign: 'left', // align text relative to max possible text length of each entry.
   textPosition: 'right', // 'left' | 'right' | 'none'
   value: {
-    digits: 1 // number of fraction digits. 0 | 1 | 2.
+    digits: 1, // number of fraction digits. 0 | 1 | 2.
               // It defaults to different values depending on the max value.
     max: 1, // Value that means 100%.
             // It can be set to undefined, to indicate that value is not available.
@@ -57,8 +57,8 @@ progressBar({
 
 // To style multiple values differently.
 progressBar({
-  ...
-  value: [{ ... }, { ... }, ...]
+  ...,
+  value: [{ ... }, { ... }, ...],
 })
 ```
 
