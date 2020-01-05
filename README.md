@@ -35,7 +35,7 @@ bar.render(0.5, undefined) // [---------|----------] 0.5 ---
 progressBar({
   bar: {
     completedMarker: '-', // marker for completed section of the bar
-    incompleteMarker: '-' // marker for incomplete section of the bar
+    incompleteMarker: '-', // marker for incomplete section of the bar
     leftBracketMarker: '['
     rightBracketMarker: ']'
   },
