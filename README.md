@@ -37,7 +37,7 @@ progressBar({
     completedMarker: '-', // marker for completed section of the bar
     incompleteMarker: '-', // marker for incomplete section of the bar
     leftBracketMarker: '[',
-    rightBracketMarker: ']'
+    rightBracketMarker: ']',
   },
   length: 30, // total length of the result, including the text
   textAlign: 'left', // align text relative to max possible text length of each entry.
