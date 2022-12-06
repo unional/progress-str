@@ -1,6 +1,6 @@
 export type BarFormat = {
-  leftBracketMarker: string,
-  rightBracketMarker: string,
+  leftBracketMarker: string
+  rightBracketMarker: string
   completedMarker: string
   incompleteMarker: string
 }

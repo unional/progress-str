@@ -1,7 +1,7 @@
-import leftPad from 'left-pad';
-import rightPad from 'right-pad';
-import { BaseOptions } from './interfaces';
-import { ValueEntry } from './ValueEntry';
+import leftPad from 'left-pad'
+import rightPad from 'right-pad'
+import { BaseOptions } from './interfaces'
+import { ValueEntry } from './ValueEntry'
 
 export function renderText(baseOptions: BaseOptions, entries: ValueEntry[]) {
   return entries.map(e => renderEntry(baseOptions.textAlign, e)).join(' ')
@@ -24,12 +24,13 @@ function formatText(entry: ValueEntry) {
       return entry.value === undefined ?
         '---' :
         entry.value.toFixed(entry.actualDigits)
-    case 'ratio':
+    case 'ratio': {
       const max = entry.max === undefined ?
         '---' :
         entry.digits !== undefined ? entry.max.toFixed(entry.actualDigits) : entry.max
       return entry.value === undefined ?
         `---/${max}` :
         `${entry.value.toFixed(entry.actualDigits)}/${max}`
+    }
   }
 }

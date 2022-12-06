@@ -1,6 +1,0 @@
-{
-  "extends": "plugin:harmony/latest",
-  "env": {
-    "node": true
-  }
-}

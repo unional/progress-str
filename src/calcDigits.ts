@@ -1,10 +1,10 @@
-import { ValueOptions } from './interfaces';
+import { ValueOptions } from './interfaces'
 
 export function getLongestSampleText(options: ValueOptions, actualDigits: number) {
   switch (options.textStyle) {
     case 'percentage':
       return `${addDigits(100, actualDigits)}%`
-    case 'number':
+    case 'number': {
       const max = options.max === undefined ? 1 : options.max
       if (hasDecimal(max)) {
         const round = Math.trunc(max)
@@ -16,6 +16,7 @@ export function getLongestSampleText(options: ValueOptions, actualDigits: number
       else {
         return `${addDigits(max, actualDigits)}`
       }
+    }
     case 'ratio':
       if (hasDecimal(options.max)) {
         const round = Math.trunc(options.max!)
@@ -35,7 +36,7 @@ export function calcMaxDigits(options: ValueOptions) {
     case 'percentage':
       return options.digits || 0
     case 'number':
-    case 'ratio':
+    case 'ratio': {
       const max = options.max === undefined ? 1 : options.max
       if (hasDecimal(max)) {
         return options.digits || getDecimal(max) + 1
@@ -46,6 +47,7 @@ export function calcMaxDigits(options: ValueOptions) {
       else {
         return options.digits || 0
       }
+    }
   }
 }
 
