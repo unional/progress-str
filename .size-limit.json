@@ -2,6 +2,6 @@
   {
 
     "path": "./dist/index.js",
-    "limit": "10 kb"
+    "limit": "15 kb"
   }
 ]
