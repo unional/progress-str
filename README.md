@@ -2,10 +2,10 @@
 
 [![NPM version][npm-image]][npm-url]
 [![NPM downloads][downloads-image]][downloads-url]
-[![Circle CI][circleci-image]][circleci-url]
+
+[![GitHub NodeJS][github-nodejs]][github-action-url]
 [![Codecov][codecov-image]][codecov-url]
 
-[![Greenkeeper badge][green-keeper-image]][green-keeper-url]
 [![semantic-release][semantic-release-image]][semantic-release-url]
 
 [![Visual Studio Code][vscode-image]][vscode-url]
@@ -62,14 +62,12 @@ progressBar({
 })
 ```
 
-[circleci-image]: https://circleci.com/gh/unional/progress-str/tree/master.svg?style=shield
-[circleci-url]: https://circleci.com/gh/unional/progress-str/tree/master
 [codecov-image]: https://codecov.io/gh/unional/progress-str/branch/master/graph/badge.svg
 [codecov-url]: https://codecov.io/gh/unional/progress-str
 [downloads-image]: https://img.shields.io/npm/dm/progress-str.svg?style=flat
 [downloads-url]: https://npmjs.org/package/progress-str
-[green-keeper-image]:https://badges.greenkeeper.io/unional/progress-str.svg
-[green-keeper-url]:https://greenkeeper.io/
+[github-nodejs]: https://github.com/unional/progress-str/actions/workflows/release.yml/badge.svg
+[github-action-url]: https://github.com/unional/progress-str/actions/workflows/release.yml
 [npm-image]: https://img.shields.io/npm/v/progress-str.svg?style=flat
 [npm-url]: https://npmjs.org/package/progress-str
 [semantic-release-image]:https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
