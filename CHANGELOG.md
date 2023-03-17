@@ -1,3 +1,10 @@
+## [3.4.4](https://github.com/unional/progress-str/compare/v3.4.3...v3.4.4) (2023-03-17)
+
+
+### Bug Fixes
+
+* **deps:** update dependency type-plus to v6 ([#103](https://github.com/unional/progress-str/issues/103)) ([b921a08](https://github.com/unional/progress-str/commit/b921a089712f3c148ee5b441608c8898b235dc06))
+
 ## [3.4.3](https://github.com/unional/progress-str/compare/v3.4.2...v3.4.3) (2022-12-14)
 
 
