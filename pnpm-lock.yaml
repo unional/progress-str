@@ -36,7 +36,7 @@ specifiers:
   size-limit: ^8.1.0
   string-length: ^5.0.0
   ts-jest: ^29.0.3
-  type-plus: ^5.0.0
+  type-plus: ^6.0.0
   typescript: ^5.0.0
 
 dependencies:
@@ -44,7 +44,7 @@ dependencies:
   make-error: 1.3.6
   right-pad: 1.0.1
   string-length: 5.0.1
-  type-plus: 5.0.0
+  type-plus: 6.0.0
 
 devDependencies:
   '@commitlint/cli': 17.3.0
@@ -5941,8 +5941,8 @@ packages:
       unpartial: 1.0.4
     dev: true
 
-  /type-plus/5.0.0:
-    resolution: {integrity: sha512-nKp5pOQDldmR9BdEjLplLFwiXTVhOK2kReBSgVJ65URDLXCqENYzVDCONaExADIIc1CAGzvzTkB0TUgMAWR2qQ==}
+  /type-plus/6.0.0:
+    resolution: {integrity: sha512-ezkCTr6LGC87w9LHc83XJnJFfaeEa/nPhr4yzBKv2+Pw0y4FXKHgrJ2GWM4H1nSKzcEPv4q/Sfw4MKmi8NTxbg==}
     dependencies:
       tersify: 3.11.1
       unpartial: 1.0.4
