@@ -21,8 +21,8 @@ importers:
         specifier: ^5.0.0
         version: 5.0.1
       type-plus:
-        specifier: ^6.0.0
-        version: 6.8.1
+        specifier: ^7.0.0
+        version: 7.6.2
     devDependencies:
       '@changesets/cli':
         specifier: ^2.26.2
@@ -3166,9 +3166,6 @@ packages:
   type-fest@4.41.0:
     resolution: {integrity: sha512-TeTSQ6H5YHvpqVwBRcnLDCBnDOHWYu7IvGbHT6N8AOymcr9PJGjc1GTtiWZTYg0NCgYwvnYWEkVChQAr9bjfwA==}
     engines: {node: '>=16'}
-
-  type-plus@6.8.1:
-    resolution: {integrity: sha512-yEv9ZE4Lw7fUGQOUYGtUoRJrC46Uta2U2HnpuvIVnwFVmzMP9oE5on7xOxsT39o0hk2lkFghZqlba9GvmW0/rw==}
 
   type-plus@7.6.2:
     resolution: {integrity: sha512-qUlXv9Y0/W56pg38m275IMD3WA03QbVoqNY16S3kmwtuA4gOT2iheyUdOp8NWrmXWpf7om98hzr7AZD/eW2jLA==}
@@ -6931,11 +6928,6 @@ snapshots:
   type-fest@0.8.1: {}
 
   type-fest@4.41.0: {}
-
-  type-plus@6.8.1:
-    dependencies:
-      tersify: 3.12.1
-      unpartial: 1.0.5
 
   type-plus@7.6.2:
     dependencies:
