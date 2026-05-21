@@ -61,11 +61,11 @@ importers:
         specifier: ^8.28.0
         version: 8.57.1
       eslint-config-prettier:
-        specifier: ^8.5.0
-        version: 8.10.2(eslint@8.57.1)
+        specifier: ^10.0.0
+        version: 10.1.8(eslint@8.57.1)
       eslint-plugin-harmony:
         specifier: ^7.1.1
-        version: 7.2.0(@typescript-eslint/eslint-plugin@8.59.4(@typescript-eslint/parser@6.21.0(eslint@8.57.1)(typescript@5.9.3))(eslint@8.57.1)(typescript@5.9.3))(eslint-config-prettier@8.10.2(eslint@8.57.1))(eslint@8.57.1)(typescript@5.9.3)
+        version: 7.2.0(@typescript-eslint/eslint-plugin@8.59.4(@typescript-eslint/parser@6.21.0(eslint@8.57.1)(typescript@5.9.3))(eslint@8.57.1)(typescript@5.9.3))(eslint-config-prettier@10.1.8(eslint@8.57.1))(eslint@8.57.1)(typescript@5.9.3)
       eslint-plugin-yml:
         specifier: ^1.2.0
         version: 1.19.1(eslint@8.57.1)
@@ -1493,8 +1493,8 @@ packages:
     peerDependencies:
       eslint: '>=6.0.0'
 
-  eslint-config-prettier@8.10.2:
-    resolution: {integrity: sha512-/IGJ6+Dka158JnP5n5YFMOszjDWrXggGz1LaK/guZq9vZTmniaKlHcsscvkAhn9y4U+BU3JuUdYvtAMcv30y4A==}
+  eslint-config-prettier@10.1.8:
+    resolution: {integrity: sha512-82GZUjRS0p/jganf6q1rEO25VSoHH0hKPCTrgillPjdI/3bgBhAE1QzHrHTizjpRvy6pGAvKjDJtk2pF9NDq8w==}
     hasBin: true
     peerDependencies:
       eslint: '>=7.0.0'
@@ -4508,11 +4508,11 @@ snapshots:
       eslint: 8.57.1
       semver: 7.8.0
 
-  eslint-config-prettier@8.10.2(eslint@8.57.1):
+  eslint-config-prettier@10.1.8(eslint@8.57.1):
     dependencies:
       eslint: 8.57.1
 
-  eslint-plugin-harmony@7.2.0(@typescript-eslint/eslint-plugin@8.59.4(@typescript-eslint/parser@6.21.0(eslint@8.57.1)(typescript@5.9.3))(eslint@8.57.1)(typescript@5.9.3))(eslint-config-prettier@8.10.2(eslint@8.57.1))(eslint@8.57.1)(typescript@5.9.3):
+  eslint-plugin-harmony@7.2.0(@typescript-eslint/eslint-plugin@8.59.4(@typescript-eslint/parser@6.21.0(eslint@8.57.1)(typescript@5.9.3))(eslint@8.57.1)(typescript@5.9.3))(eslint-config-prettier@10.1.8(eslint@8.57.1))(eslint@8.57.1)(typescript@5.9.3):
     dependencies:
       '@rushstack/eslint-patch': 1.16.1
       '@typescript-eslint/eslint-plugin': 8.59.4(@typescript-eslint/parser@6.21.0(eslint@8.57.1)(typescript@5.9.3))(eslint@8.57.1)(typescript@5.9.3)
@@ -4520,7 +4520,7 @@ snapshots:
       '@typescript-eslint/parser': 6.21.0(eslint@8.57.1)(typescript@5.9.3)
       eslint: 8.57.1
     optionalDependencies:
-      eslint-config-prettier: 8.10.2(eslint@8.57.1)
+      eslint-config-prettier: 10.1.8(eslint@8.57.1)
     transitivePeerDependencies:
       - supports-color
       - typescript
