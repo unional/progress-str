@@ -1,3 +1,6 @@
+# OSX
+.DS_Store
+
 # Logs
 logs
 *.log
@@ -14,6 +17,8 @@ lib-cov
 # Coverage directory used by tools like istanbul
 coverage
 .nyc_output
+.progress
+.reports
 
 # Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
 .grunt
@@ -34,12 +39,17 @@ node_modules
 # Optional REPL history
 .node_repl_history
 
+.turbo
+
 # webstorm
 .idea
 
-# typings
-typings
-
-# project folders
-dist
-.progress
+# build output — unanchored so it matches inside packages/*, not just the repo root.
+# Anchored patterns (/cjs) silently stopped matching when the package moved into
+# packages/color-map, which let build artifacts show up as untracked.
+cjs/
+dist/
+esm/
+lib/
+out/
+tslib/

@@ -2,9 +2,33 @@ name: pull-request
 on:
   pull_request:
     types: [opened, synchronize]
+  # The merge queue builds a temporary branch that fires neither `pull_request` nor
+  # `push`, so without this trigger the required `code / all-checks` context never
+  # starts and the queue waits on it forever. It must be on the default branch before
+  # the merge_queue rule is added.
+  merge_group:
 
 jobs:
   code:
-    uses: unional/.github/.github/workflows/pnpm-verify.yml@main
+    uses: cyberuni/.github/.github/workflows/pnpm-verify.yml@main
     with:
+      # cyberuni's default matrix is 3 OS x 2 Node. This is a small pure-TS library with
+      # no platform-specific behaviour, so ubuntu alone is the honest coverage. It also
+      # sidesteps that workflow's unconditional Xvfb step, which has no counterpart on
+      # the macOS and Windows runners.
       os: '["ubuntu-latest"]'
+      # No browser tests — vitest runs in node.
+      skip-playwright: true
+      # `skip-codecov` stays at its `false` default: the upload feeds the README badge.
+      # It gates nothing. `codecov/project` and `codecov/patch` must never be required
+      # status contexts — the merge gate is `code / all-checks` alone.
+
+  # The release PR is the last point where the next publish is reviewable; after it
+  # merges, release.yml publishes unattended. Only runs there, so ordinary PRs are
+  # unaffected. Deliberately not a required check — it is skipped on every other PR,
+  # and a skipped check never satisfies a required context.
+  publish-gate:
+    if: startsWith(github.head_ref, 'changeset-release/')
+    uses: cyberuni/.github/.github/workflows/pnpm-publish-gate.yml@main
+    permissions:
+      contents: read
