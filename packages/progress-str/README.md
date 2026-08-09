@@ -6,10 +6,7 @@
 [![GitHub NodeJS][github-nodejs]][github-action-url]
 [![Codecov][codecov-image]][codecov-url]
 
-[![semantic-release][semantic-release-image]][semantic-release-url]
-
 [![Visual Studio Code][vscode-image]][vscode-url]
-[![Wallaby.js][wallaby-image]][wallaby-url]
 
 Create a string based progress bar.
 
@@ -62,17 +59,13 @@ progressBar({
 })
 ```
 
-[codecov-image]: https://codecov.io/gh/unional/progress-str/branch/master/graph/badge.svg
-[codecov-url]: https://codecov.io/gh/unional/progress-str
+[codecov-image]: https://codecov.io/gh/cyberuni/progress-str/branch/main/graph/badge.svg
+[codecov-url]: https://codecov.io/gh/cyberuni/progress-str
 [downloads-image]: https://img.shields.io/npm/dm/progress-str.svg?style=flat
 [downloads-url]: https://npmjs.org/package/progress-str
-[github-nodejs]: https://github.com/unional/progress-str/actions/workflows/release.yml/badge.svg
-[github-action-url]: https://github.com/unional/progress-str/actions/workflows/release.yml
+[github-nodejs]: https://github.com/cyberuni/progress-str/actions/workflows/pull-request.yml/badge.svg
+[github-action-url]: https://github.com/cyberuni/progress-str/actions
 [npm-image]: https://img.shields.io/npm/v/progress-str.svg?style=flat
 [npm-url]: https://npmjs.org/package/progress-str
-[semantic-release-image]:https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
-[semantic-release-url]:https://github.com/semantic-release/semantic-release
 [vscode-image]: https://img.shields.io/badge/vscode-ready-green.svg
 [vscode-url]: https://code.visualstudio.com/
-[wallaby-image]: https://img.shields.io/badge/wallaby.js-configured-green.svg
-[wallaby-url]: https://wallabyjs.com
