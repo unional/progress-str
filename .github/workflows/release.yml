@@ -5,11 +5,22 @@ on:
 
 jobs:
   code:
-    uses: unional/.github/.github/workflows/pnpm-verify.yml@main
+    uses: cyberuni/.github/.github/workflows/pnpm-verify.yml@main
     with:
       os: '["ubuntu-latest"]'
+      skip-playwright: true
 
+  # OIDC, not NPM_TOKEN: the previous caller was pnpm-release-changeset.yml, which
+  # checks out with secrets.CI_GITHUB_TOKEN and publishes with a long-lived NPM_TOKEN.
+  # That token died some time after 2022 and every push to main since has failed at
+  # publish with E404.
   release:
-    uses: unional/.github/.github/workflows/pnpm-release-changeset.yml@main
+    uses: cyberuni/.github/.github/workflows/pnpm-release-changeset-oidc.yml@main
     needs: code
-    secrets: inherit
+    # Declaring `permissions:` replaces the default, so every scope the callee needs
+    # must be listed here — unlisted ones drop to `none`, not to the default. This is
+    # what lets the repo default be tightened to `read`.
+    permissions:
+      id-token: write
+      contents: write
+      pull-requests: write
