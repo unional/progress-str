@@ -38,7 +38,7 @@ export default defineConfig([
 		// The ESM-only dependencies have to be inlined; leaving them external is what
 		// made the previously published CommonJS output unloadable. The rest stay
 		// external so consumers keep deduping them.
-		noExternal: ['string-length'],
+		deps: { alwaysBundle: ['string-length'] },
 		hooks: {
 			// The package root is `"type": "module"`, so cjs/index.js is only read as
 			// CommonJS because of this marker. tsdown's `copy` treats `to` as a
