@@ -1,4 +1,4 @@
-import t from 'assert'
+import t from 'node:assert'
 import stringLength from 'string-length'
 
 export function assertRendering(actual: string, expected: string, length = 30) {

@@ -1,4 +1,4 @@
-import t from 'assert'
+import t from 'node:assert'
 import a from 'assertron'
 import chalk from 'chalk'
 import { assertRendering } from './asserts.js'

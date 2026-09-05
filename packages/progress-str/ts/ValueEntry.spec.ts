@@ -1,4 +1,4 @@
-import t from 'assert'
+import t from 'node:assert'
 import { createValueEntry } from './ValueEntry.js'
 
 test('maxLength for percentage is 4 (100%)', () => {
