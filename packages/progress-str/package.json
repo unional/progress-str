@@ -1,6 +1,6 @@
 {
 	"name": "progress-str",
-	"version": "3.4.4",
+	"version": "3.5.0",
 	"description": "Create a progress string",
 	"homepage": "https://github.com/cyberuni/progress-str",
 	"bugs": {
